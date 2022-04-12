@@ -6,7 +6,7 @@ import org.springframework.web.bind.annotation.*;
 public class HomeControllerTest {
     @GetMapping("/test")
     public String test(){
-        return "<h1>hello spring boot<h1>";
+        return "테스트 페이지입니다.";
     }
 
     @RequestMapping(path="/hi", method = RequestMethod.GET)
