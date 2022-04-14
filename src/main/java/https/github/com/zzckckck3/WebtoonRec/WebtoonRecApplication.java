@@ -6,7 +6,9 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 @SpringBootApplication
 public class WebtoonRecApplication {
 
-	public static void main(String[] args) { SpringApplication.run(WebtoonRecApplication.class, args );
+	public static void main(String[] args) {
+		SpringApplication.run(WebtoonRecApplication.class, args );
+
 	}
 
 }
