@@ -1,5 +1,6 @@
 package https.github.com.zzckckck3.WebtoonRec.config;
 
+import lombok.Value;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
@@ -17,4 +18,5 @@ public class WebmvcConfiguration implements WebMvcConfigurer{
                 .addResourceLocations("classpath:/templates/", "classpath:/static/")
                 .setCacheControl(CacheControl.maxAge(10, TimeUnit.MINUTES));
     }
+
 }
