@@ -1,7 +1,6 @@
 package https.github.com.zzckckck3.WebtoonRec.Domain;
 
 import lombok.*;
-
 import javax.persistence.*;
 
 @Entity //table > 인스턴트들이 jpa로 관리되는 엔티티 객체라는 것을 의미

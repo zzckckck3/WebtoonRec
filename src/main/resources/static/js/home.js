@@ -46,9 +46,6 @@ function categorySetting(){
         $(this).css("color","white");
         $(this).css("background-color","black");
         $(this).css("border-radius","3px 3px");
-
-
-
 })
 }
 function Cleaning(bodytag){
@@ -70,10 +67,10 @@ function getTypedItem(dtype){
     url+="?offset=0&limit=30"
     fetch(url,{method:"GET"}).then((response) => response.json()).then(
         (data) => {
-            $.each(data, function (idx) {
-                var innerhtml = '<li class="item" id='+data[idx].item_ID +'><div id="item_img"><img src=' + data[idx].imgSrc + '></div>' +
-                    '<div id="item_text"><span><a id="merchansub">제목:</a> <a id="item_name">'+data[idx].name+'</a></span></br>'+'<span><a id="merchansub"></span></br></div></li>'
-                $("#shoplist").append(innerhtml);
+            $.each(data, function (idx) {[idx].imgSrc + '></div>' +
+                                                             '<div id="item_text"><span><a id="merchansub">제목:</a> <a id="item_name">'+data[idx].name+'</a></span></br>'+'<span><a id="merchansub"></span></br></div></li>'
+                                                         $("#shoplist").append(innerhtml);
+                var innerhtml = '<li class="item" id='+data[idx].item_ID +'><div id="item_img"><img src=' + data
             })
         }
     )
