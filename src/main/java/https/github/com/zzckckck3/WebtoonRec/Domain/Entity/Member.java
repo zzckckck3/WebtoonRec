@@ -1,54 +1,33 @@
-package https.github.com.zzckckck3.WebtoonRec.Domain.Entity;
+/*package https.github.com.zzckckck3.WebtoonRec.Domain.Entity;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
+import lombok.AccessLevel;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
-import org.springframework.format.annotation.DateTimeFormat;
-//import org.springframework.security.crypto.password.PasswordEncoder;
 
 import javax.persistence.*;
-import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.util.List;
 
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Entity
 @Getter
-@Table(name="MEMBER")
-public class Member {
-
-    @Column(name = "member_id", nullable = false)
-    @Setter
-    @Id @GeneratedValue
+public class Member implements MemberDetails {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long Member_ID;
 
-    @Setter @Column(nullable = false)
+    @Column(name = "user_ID", nullable = false)
     private String user_ID;
-    @Column(name = "pwd", nullable = false)@Setter
+
+    @Column(name = "pwd", nullable = false)
     private String pwd;
-    @Column(name = "NAME", nullable = false, length = 20)@Setter
-    private String Name;
 
-    /*
-    @JsonIgnore
-    @OneToMany(mappedBy = "member", fetch = FetchType.LAZY)
-    private List<Orders> ordersList
-    @Enumerated(EnumType.STRING)@Setter
-    private MemberRoleType roleType = MemberRoleType.User;
-    */
-    @Column(name = "RegDate")@Setter
-    @DateTimeFormat(pattern = "yyyy-mm-dd")
-    private LocalDate date;
+    @Column(name = "name", nullable = false)
+    private String name;
 
-    public static Member createMember(String id, String name, String pwd) {
-        Member newMember = new Member();
-        newMember.setUser_ID(id);
-        newMember.setName(name);
-        newMember.setPwd(pwd);
-        newMember.setRoleType(MemberRoleType.USER);
-        newMember.setDate(LocalDate.now());
-        return newMember;
-    }
-    public void Encodepwd(PasswordEncoder encoder){
-        this.pwd=encoder.encode(this.pwd);
-    }
+    @Column(name = "gender", nullable = false)
+    private String gender;
+
+    @Column(name = "role", nullable = false)
+    private String role;
 }
+*/
