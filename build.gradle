@@ -1,5 +1,5 @@
 plugins {
-	id 'org.springframework.boot' version '2.6.6'
+	id 'org.springframework.boot' version '2.6.2'
 	id 'io.spring.dependency-management' version '1.0.11.RELEASE'
 	id 'java'
 }
@@ -8,7 +8,7 @@ group = 'https.github.com.zzckckck3'
 version = '0.0.1-SNAPSHOT'
 sourceCompatibility = '11'
 
-configurations {
+/*configurations {
 	developmentOnly
 	runtimeClasspath{
 		extendsFrom developmentOnly
@@ -16,7 +16,7 @@ configurations {
 	compileOnly {
 		extendsFrom annotationProcessor
 	}
-}
+}*/
 
 repositories {
 	mavenCentral()
@@ -26,22 +26,28 @@ dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
 	implementation 'org.springframework.boot:spring-boot-starter-thymeleaf'
 	implementation 'org.springframework.boot:spring-boot-starter-web'
-	implementation 'com.google.code.findbugs:jsr305:3.0.2'
 	implementation 'org.springframework.boot:spring-boot-starter-jdbc'
-	implementation 'mysql:mysql-connector-java'
-	implementation 'junit:junit:4.13.1'
-	implementation group: 'com.fasterxml.jackson.datatype', name: 'jackson-datatype-hibernate5'
-	implementation 'com.fasterxml.jackson.core:jackson-databind:2.12.3'
-	implementation(fileTree(dir: 'libs', include: ['*.jar']))
+
 	compileOnly 'org.projectlombok:lombok'
-	developmentOnly 'org.springframework.boot:spring-boot-devtools'
+	implementation 'mysql:mysql-connector-java'
 	runtimeOnly 'mysql:mysql-connector-java'
 	annotationProcessor 'org.projectlombok:lombok'
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
 
+	implementation 'com.google.code.findbugs:jsr305:3.0.2'
+	implementation 'junit:junit:4.13.1'
+	implementation group: 'com.fasterxml.jackson.datatype', name: 'jackson-datatype-hibernate5'
+	implementation 'com.fasterxml.jackson.core:jackson-databind:2.12.3'
+	implementation(fileTree(dir: 'libs', include: ['*.jar']))
+	developmentOnly 'org.springframework.boot:spring-boot-devtools'
+
+	//https://mvnrepository.com/artifact/io.springfox/springfox-swagger-ui >> swagger
+	implementation group: 'io.springfox', name: 'springfox-swagger-ui', version: '2.9.2'
+	implementation group: 'io.springfox', name: 'springfox-swagger2', version: '2.9.2'
+
 	//security
-	implementation 'org.springframework.boot:spring-boot-starter-security'
-	implementation 'org.thymeleaf.extras:thymeleaf-extras-springsecurity5'
+	//implementation 'org.springframework.boot:spring-boot-starter-security'
+	//implementation 'org.thymeleaf.extras:thymeleaf-extras-springsecurity5'
 ''}
 
 tasks.named('test') {
