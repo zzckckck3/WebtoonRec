@@ -1,6 +1,6 @@
-package https.github.com.zzckckck3.WebtoonRec.Dto;
+package https.github.com.zzckckck3.WebtoonRec.Data.Dto;
 
-import https.github.com.zzckckck3.WebtoonRec.Domain.Entity.WebtoonEntity;
+import https.github.com.zzckckck3.WebtoonRec.Data.Domain.Entity.WebtoonEntity;
 import lombok.*;
 
 @Data

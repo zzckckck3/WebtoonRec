@@ -1,4 +1,4 @@
-package https.github.com.zzckckck3.WebtoonRec.Dto;
+package https.github.com.zzckckck3.WebtoonRec.Data.Dto;
 
 import lombok.Getter;
 import lombok.Setter;
