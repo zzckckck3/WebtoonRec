@@ -1,6 +1,6 @@
 package https.github.com.zzckckck3.WebtoonRec.Controller;
 
-import https.github.com.zzckckck3.WebtoonRec.Dto.MemberDto;
+import https.github.com.zzckckck3.WebtoonRec.Data.Dto.MemberDto;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PutMapping;

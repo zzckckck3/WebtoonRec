@@ -1,4 +1,4 @@
-package https.github.com.zzckckck3.WebtoonRec.Domain;
+package https.github.com.zzckckck3.WebtoonRec.Data.Domain;
 
 import lombok.*;
 import javax.persistence.*;
