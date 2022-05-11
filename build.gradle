@@ -33,6 +33,7 @@ dependencies {
 	runtimeOnly 'mysql:mysql-connector-java'
 	annotationProcessor 'org.projectlombok:lombok'
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
+	testImplementation 'org.springframework.security:spring-security-test'
 
 	implementation 'com.google.code.findbugs:jsr305:3.0.2'
 	implementation 'junit:junit:4.13.1'
@@ -49,7 +50,7 @@ dependencies {
 	implementation group: 'io.springfox', name: 'springfox-swagger2', version: '2.9.2'
 
 	//security
-	//implementation 'org.springframework.boot:spring-boot-starter-security'
+	implementation 'org.springframework.boot:spring-boot-starter-security'
 	//implementation 'org.thymeleaf.extras:thymeleaf-extras-springsecurity5'
 ''}
 

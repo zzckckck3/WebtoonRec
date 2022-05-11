@@ -13,10 +13,11 @@ public class WebtoonDto {
     private String webtoonName;
     private String webtoonAuthor;
     private String webtoonGenre;
-    private String webtoonURL;
     private String webtoonSummary;
+    private String webtoonURL;
     private String webtoonThumbnail;
     private String webtoonKeyword;
+    private String platform;
 
     public WebtoonEntity toEntity(){
         return WebtoonEntity.builder()
@@ -24,10 +25,11 @@ public class WebtoonDto {
                 .webtoonName(webtoonName)
                 .webtoonAuthor(webtoonAuthor)
                 .webtoonGenre(webtoonGenre)
-                .webtoonURL(webtoonURL)
                 .webtoonSummary(webtoonSummary)
+                .webtoonURL(webtoonURL)
                 .webtoonThumbnail(webtoonThumbnail)
                 .webtoonKeyword(webtoonKeyword)
+                .platform(platform)
                 .build();
     }
 }

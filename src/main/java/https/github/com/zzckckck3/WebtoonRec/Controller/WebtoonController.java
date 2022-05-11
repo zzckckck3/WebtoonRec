@@ -20,7 +20,7 @@ public class WebtoonController {
         this.webtoonService = webtoonService;
     }
 
-    @GetMapping(value = "/webtoon/{webtoonID}")
+    @GetMapping(value = "/webtoon/{webtoonId}")
     public WebtoonDto getWebtoon(@PathVariable String webtoonId){
         LOGGER.info("[WebtoonController] perform {} of Webtoon Rec API", "getWebtoon");
 
@@ -40,8 +40,9 @@ public class WebtoonController {
         String webtoonURL = webtoonDto.getWebtoonURL();
         String webtoonThumbnail = webtoonDto.getWebtoonThumbnail();
         String webtoonKeyword = webtoonDto.getWebtoonKeyword();
+        String platform = webtoonDto.getPlatform();
 
-        return webtoonService.saveWebtoon(webtoonId,webtoonName,webtoonAuthor,webtoonGenre,webtoonSummary,webtoonURL,webtoonThumbnail,webtoonKeyword);
+        return webtoonService.saveWebtoon(webtoonId,webtoonName,webtoonAuthor,webtoonGenre,webtoonSummary,webtoonURL,webtoonThumbnail,webtoonKeyword, platform);
     }
 
     @DeleteMapping(value = "/webtoon/{webtoonId}") //사용할일은 거의 없을 듯 하지만 일단 구현

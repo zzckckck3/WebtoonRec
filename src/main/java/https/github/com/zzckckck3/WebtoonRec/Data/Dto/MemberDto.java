@@ -1,15 +1,24 @@
 package https.github.com.zzckckck3.WebtoonRec.Data.Dto;
 
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
+
+import javax.management.relation.Role;
 
 //@Data //대부분의 속성들을 퉁칠 수 있다. 하지만 불필요한 메서드가 추가되기에 기피됨
-@Getter
-@Setter
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
+@ToString
+@Builder
 public class MemberDto {
-    private String name;
+    private String username;
+    private String password;
     private String email;
-    private String organization;
+    private String name;
+    private String gender;
+    private String favGenre;
+    private String exGenre;
+    private Role roleType;
 
     /*
     //아래 코드들은 어노테이션으로 생략할 수 있다.(Getter, Setter, ToString)

@@ -25,8 +25,8 @@ public class WebtoonEntity {
     String webtoonSummary;
     String webtoonURL;
     String webtoonThumbnail;
-    String webtoonKeyword;
-
+    private String webtoonKeyword;
+    String platform;
     /*
     @Column
 
@@ -43,6 +43,7 @@ public class WebtoonEntity {
                 .webtoonURL(webtoonURL)
                 .webtoonThumbnail(webtoonThumbnail)
                 .webtoonKeyword(webtoonKeyword)
+                .platform(platform)
                 .build();
     }
 }
