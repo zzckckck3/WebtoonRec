@@ -11,14 +11,22 @@ import lombok.*;
 public class WebtoonDto {
     private String webtoonId;
     private String webtoonName;
+    private String webtoonAuthor;
+    private String webtoonGenre;
     private String webtoonURL;
+    private String webtoonSummary;
+    private String webtoonThumbnail;
     private String webtoonKeyword;
 
     public WebtoonEntity toEntity(){
         return WebtoonEntity.builder()
                 .webtoonId(webtoonId)
                 .webtoonName(webtoonName)
+                .webtoonAuthor(webtoonAuthor)
+                .webtoonGenre(webtoonGenre)
                 .webtoonURL(webtoonURL)
+                .webtoonSummary(webtoonSummary)
+                .webtoonThumbnail(webtoonThumbnail)
                 .webtoonKeyword(webtoonKeyword)
                 .build();
     }

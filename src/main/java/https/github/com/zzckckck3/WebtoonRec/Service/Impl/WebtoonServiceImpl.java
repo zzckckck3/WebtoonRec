@@ -17,21 +17,31 @@ public class WebtoonServiceImpl implements WebtoonService {
     }
 
     @Override
-    public WebtoonDto saveWebtoon(String webtoonId, String webtoonName, String webtoonURL, String webtoonKeyword){
-        WebtoonEntity webtoonEntity = webtoonDataHandler.saveWebtoonEntity(webtoonId, webtoonName, webtoonURL, webtoonKeyword);
+    public WebtoonDto saveWebtoon(String webtoonId, String webtoonName, String webtoonAuthor, String webtoonGenre, String webtoonSummary,
+                                  String webtoonURL, String webtoonThumbnail, String webtoonKeyword){
+        WebtoonEntity webtoonEntity = webtoonDataHandler.saveWebtoonEntity(webtoonId, webtoonName, webtoonAuthor, webtoonGenre, webtoonSummary,
+                webtoonURL, webtoonThumbnail, webtoonKeyword);
 
         WebtoonDto webtoonDto = new WebtoonDto(webtoonEntity.getWebtoonId(),
-                webtoonEntity.getWebtoonName(), webtoonEntity.getWebtoonURL(), webtoonEntity.getWebtoonKeyword());
+                webtoonEntity.getWebtoonName(), webtoonEntity.getWebtoonAuthor(), webtoonEntity.getWebtoonGenre(),
+                webtoonEntity.getWebtoonSummary(),webtoonEntity.getWebtoonURL(), webtoonEntity.getWebtoonThumbnail(), webtoonEntity.getWebtoonKeyword());
 
         return webtoonDto;
     }
+
+    /*Override
+    public WebtoonDto saveWebtoon(String webtoonId, String webtoonName, String webtoonAuthor, String webtoonGenre, String webtoonSummary,
+                                  String webtoonURL, String webtoonThumbnail, String webtoonKeyword) {
+        return null;
+    }*/
 
     @Override
     public WebtoonDto getWebtoon(String webtoonId){
         WebtoonEntity webtoonEntity = webtoonDataHandler.getWebtoonEntity(webtoonId);
 
         WebtoonDto webtoonDto = new WebtoonDto(webtoonEntity.getWebtoonId(),
-                webtoonEntity.getWebtoonName(), webtoonEntity.getWebtoonURL(), webtoonEntity.getWebtoonKeyword());
+                webtoonEntity.getWebtoonName(), webtoonEntity.getWebtoonAuthor(), webtoonEntity.getWebtoonGenre(),
+                webtoonEntity.getWebtoonSummary(),webtoonEntity.getWebtoonURL(), webtoonEntity.getWebtoonThumbnail(), webtoonEntity.getWebtoonKeyword());
 
         return webtoonDto;
     }
