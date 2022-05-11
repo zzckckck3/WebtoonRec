@@ -20,8 +20,10 @@ public class WebtoonDataHandlerImpl implements WebtoonDataHandler {
     }
 
     @Override
-    public WebtoonEntity saveWebtoonEntity(String webtoonId, String webtoonName, String webtoonURL, String webtoonKeyword){
-        WebtoonEntity webtoonEntity = new WebtoonEntity(webtoonId, webtoonName, webtoonURL, webtoonKeyword);
+    public WebtoonEntity saveWebtoonEntity(String webtoonId, String webtoonName, String webtoonAuthor, String webtoonGenre, String webtoonSummary,
+                                           String webtoonURL, String webtoonThumbnail, String webtoonKeyword){
+        WebtoonEntity webtoonEntity = new WebtoonEntity(webtoonId, webtoonName, webtoonAuthor, webtoonGenre, webtoonSummary,
+                webtoonURL, webtoonThumbnail, webtoonKeyword);
 
         return webtoonDao.saveWebtoon(webtoonEntity);
     }

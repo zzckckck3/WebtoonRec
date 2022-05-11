@@ -20,7 +20,11 @@ public class WebtoonEntity {
     String webtoonId; //PK
 
     String webtoonName;
+    String webtoonAuthor;
+    String webtoonGenre;
+    String webtoonSummary;
     String webtoonURL;
+    String webtoonThumbnail;
     String webtoonKeyword;
 
     /*
@@ -33,7 +37,11 @@ public class WebtoonEntity {
         return WebtoonDto.builder()
                 .webtoonId(webtoonId)
                 .webtoonName(webtoonName)
+                .webtoonAuthor(webtoonAuthor)
+                .webtoonGenre(webtoonGenre)
+                .webtoonSummary(webtoonSummary)
                 .webtoonURL(webtoonURL)
+                .webtoonThumbnail(webtoonThumbnail)
                 .webtoonKeyword(webtoonKeyword)
                 .build();
     }
