@@ -17,23 +17,23 @@ public class WebtoonServiceImpl implements WebtoonService {
     }
 
     @Override
+    public WebtoonDto saveWebtoon(String id, String webtoonId, String webtoonName, String webtoonAuthor, String webtoonGenre, String webtoonSummary, String webtoonURL, String webtoonThumbnail, String webtoonKeyword, String platform) {
+        return null;
+    }
+
+    @Override
     public WebtoonDto saveWebtoon(String webtoonId, String webtoonName, String webtoonAuthor, String webtoonGenre, String webtoonSummary,
-                                  String webtoonURL, String webtoonThumbnail, String webtoonKeyword){
+                                  String webtoonURL, String webtoonThumbnail, String webtoonKeyword, String platform){
         WebtoonEntity webtoonEntity = webtoonDataHandler.saveWebtoonEntity(webtoonId, webtoonName, webtoonAuthor, webtoonGenre, webtoonSummary,
-                webtoonURL, webtoonThumbnail, webtoonKeyword);
+                webtoonURL, webtoonThumbnail, webtoonKeyword, platform);
 
         WebtoonDto webtoonDto = new WebtoonDto(webtoonEntity.getWebtoonId(),
                 webtoonEntity.getWebtoonName(), webtoonEntity.getWebtoonAuthor(), webtoonEntity.getWebtoonGenre(),
-                webtoonEntity.getWebtoonSummary(),webtoonEntity.getWebtoonURL(), webtoonEntity.getWebtoonThumbnail(), webtoonEntity.getWebtoonKeyword());
+                webtoonEntity.getWebtoonSummary(),webtoonEntity.getWebtoonURL(), webtoonEntity.getWebtoonThumbnail(),
+                webtoonEntity.getWebtoonKeyword(), webtoonEntity.getPlatform());
 
         return webtoonDto;
     }
-
-    /*Override
-    public WebtoonDto saveWebtoon(String webtoonId, String webtoonName, String webtoonAuthor, String webtoonGenre, String webtoonSummary,
-                                  String webtoonURL, String webtoonThumbnail, String webtoonKeyword) {
-        return null;
-    }*/
 
     @Override
     public WebtoonDto getWebtoon(String webtoonId){
@@ -41,7 +41,8 @@ public class WebtoonServiceImpl implements WebtoonService {
 
         WebtoonDto webtoonDto = new WebtoonDto(webtoonEntity.getWebtoonId(),
                 webtoonEntity.getWebtoonName(), webtoonEntity.getWebtoonAuthor(), webtoonEntity.getWebtoonGenre(),
-                webtoonEntity.getWebtoonSummary(),webtoonEntity.getWebtoonURL(), webtoonEntity.getWebtoonThumbnail(), webtoonEntity.getWebtoonKeyword());
+                webtoonEntity.getWebtoonSummary(),webtoonEntity.getWebtoonURL(), webtoonEntity.getWebtoonThumbnail(),
+                webtoonEntity.getWebtoonKeyword(), webtoonEntity.getPlatform());
 
         return webtoonDto;
     }
