@@ -36,11 +36,12 @@ dependencies {
 	testImplementation 'org.springframework.security:spring-security-test'
 
 	implementation 'com.google.code.findbugs:jsr305:3.0.2'
-	implementation 'junit:junit:4.13.1'
+	implementation 'junit:junit:4.12'
 	implementation group: 'com.fasterxml.jackson.datatype', name: 'jackson-datatype-hibernate5'
 	implementation 'com.fasterxml.jackson.core:jackson-databind:2.12.3'
 	implementation(fileTree(dir: 'libs', include: ['*.jar']))
 	developmentOnly 'org.springframework.boot:spring-boot-devtools'
+
 
 	//logback
 	//implementation 'org.bgee.log4jdbc-log4j2:log4jdbc-log4j2-jdbc4.1:1.16'
@@ -50,7 +51,8 @@ dependencies {
 	implementation group: 'io.springfox', name: 'springfox-swagger2', version: '2.9.2'
 
 	//security
-	implementation 'org.springframework.boot:spring-boot-starter-security'
+	//implementation 'org.springframework.boot:spring-boot-starter-security'
+	implementation 'org.springframework.boot:spring-boot-starter-validation'
 	//implementation 'org.thymeleaf.extras:thymeleaf-extras-springsecurity5'
 ''}
 

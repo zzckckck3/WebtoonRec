@@ -1,3 +1,7 @@
+ul{
+    list-style:none;
+}
+
 body{
     width:1500px;
     position: relative;
@@ -173,7 +177,7 @@ hr{
     top: 20px;
 
 }
-#shoplist{
+#webtoonlist{
     position:absolute;
 
     top:300px;
@@ -188,7 +192,7 @@ hr{
     align-content: flex-start;
 
 }
-#shoplist li{
+#webtoonlist li{
     cursor:pointer;
     margin-top:0;
     width:200px;
@@ -200,7 +204,6 @@ hr{
 }
 li #item_img{
     position: relative;
-
     width:150px;
     height:150px;
     top:15px;

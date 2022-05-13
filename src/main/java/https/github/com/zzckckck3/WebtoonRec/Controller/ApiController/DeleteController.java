@@ -1,4 +1,4 @@
-package https.github.com.zzckckck3.WebtoonRec.Controller;
+package https.github.com.zzckckck3.WebtoonRec.Controller.ApiController;
 
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.PathVariable;

@@ -1,4 +1,4 @@
-package https.github.com.zzckckck3.WebtoonRec.Controller;
+package https.github.com.zzckckck3.WebtoonRec.Controller.ApiController;
 
 import https.github.com.zzckckck3.WebtoonRec.Data.Dto.WebtoonDto;
 import https.github.com.zzckckck3.WebtoonRec.Service.Impl.WebtoonServiceImpl;
@@ -11,12 +11,12 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 @RequestMapping("/api/v1/webtoon-api")
 @Slf4j
-public class WebtoonController {
-    private final Logger LOGGER = LoggerFactory.getLogger(WebtoonController.class);
+public class WebtoonApiController {
+    private final Logger LOGGER = LoggerFactory.getLogger(WebtoonApiController.class);
     private WebtoonServiceImpl webtoonService;
 
     @Autowired
-    public WebtoonController(WebtoonServiceImpl webtoonService){
+    public WebtoonApiController(WebtoonServiceImpl webtoonService){
         this.webtoonService = webtoonService;
     }
 
