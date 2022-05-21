@@ -181,7 +181,7 @@ hr{
     position:absolute;
 
     top:300px;
-    width:900px;
+    width:1000px;
     height:800px;
     list-style: none;
     margin:0px;
@@ -195,8 +195,8 @@ hr{
 #webtoonlist li{
     cursor:pointer;
     margin-top:0;
-    width:200px;
-    height:250px;
+    width:160px;
+    height:200px;
     margin-left:12.5px;
     margin-right:12.5px;
     margin-bottom: 10px;
@@ -211,6 +211,7 @@ li #item_img{
 }
 li #merchansub{
     font-size: 10px;
+    width: 160px;
 }
 
 li #item_img img{
@@ -225,7 +226,7 @@ li #item_img img{
     position: relative;
     margin-top : 20px;
 
-    width:200px;
+    width:150px;
     height:90px;
     text-align: left;
 }

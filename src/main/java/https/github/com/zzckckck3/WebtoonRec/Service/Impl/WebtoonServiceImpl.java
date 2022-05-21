@@ -1,6 +1,7 @@
 package https.github.com.zzckckck3.WebtoonRec.Service.Impl;
 
 import https.github.com.zzckckck3.WebtoonRec.Data.Domain.Entity.WebtoonEntity;
+import https.github.com.zzckckck3.WebtoonRec.Data.Domain.Repository.WebtoonRepository;
 import https.github.com.zzckckck3.WebtoonRec.Data.Dto.WebtoonDto;
 import https.github.com.zzckckck3.WebtoonRec.Data.Handler.WebtoonDataHandler;
 import https.github.com.zzckckck3.WebtoonRec.Service.WebtoonService;
@@ -10,6 +11,7 @@ import org.springframework.stereotype.Service;
 @Service
 public class WebtoonServiceImpl implements WebtoonService {
     WebtoonDataHandler webtoonDataHandler;
+    WebtoonRepository webtoonRepository;
 
     @Autowired
     public WebtoonServiceImpl(WebtoonDataHandler webtoonDataHandler){
@@ -46,4 +48,5 @@ public class WebtoonServiceImpl implements WebtoonService {
 
         return webtoonDto;
     }
+
 }

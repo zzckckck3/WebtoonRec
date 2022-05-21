@@ -19,14 +19,14 @@ public class WebtoonEntity {
     @Id //한 테이블당 하나의 primary key가 필요한데, 자바에서는 Id를 부여해서 생성해준다
     String webtoonId; //PK
 
-    String webtoonName;
-    String webtoonAuthor;
-    String webtoonGenre;
-    String webtoonSummary;
-    String webtoonURL;
-    String webtoonThumbnail;
+    private String webtoonName;
+    private String webtoonAuthor;
+    private String webtoonGenre;
+    private String webtoonSummary;
+    private String webtoonURL;
+    private String webtoonThumbnail;
     private String webtoonKeyword;
-    String platform;
+    private String platform;
     /*
     @Column
 

@@ -15,10 +15,10 @@
 <body>
 <div id="wrap">
     <nav id="navi-bar">
-        <a id="login-navi" href="member/memLogin">로그인</a>
-        <a id="join-navi" href="member/memJoin">회원가입</a>
-        <a id="mypage">마이페이지</a>
-        <a href="/contact">FAQ</a>
+        <a id="login-navi" href="/user/login">로그인</a>
+        <a id="join-navi" href="/user/signup">회원가입</a>
+        <a id="mypage">마이페이지</a> <!--미구현-->
+        <a href="/contact">FAQ</a> <!--미구현-->
     </nav>
     <div id="bodyheader">
         <div id="mainHeaderbar">
@@ -35,8 +35,12 @@
 
     <hr>
     <div style="height:100x; margin-top: 20px;"><strong>추천 웹툰</strong></div>
-
     <hr>
+    <select id="dataPerPage">
+        <option value="10">10개씩보기</option>
+        <option value="15">15개씩보기</option>
+        <option value="20">20개씩보기</option>
+    </select>
     <div id="category_part">
 
         <ul id="category_list">
@@ -62,7 +66,8 @@
                 <button>바로가기</button>
             </div>
         </li-->
-
+    </ul>
+    <ul id="pagingul">
     </ul>
 
 </div>

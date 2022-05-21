@@ -1,4 +1,3 @@
-
 $(document).ready(function(){
     getItem();
     gotoItem();
@@ -11,15 +10,15 @@ $(document).ready(function(){
 
 function getItem(){
     Cleaning($("#webtoonlist"));
-    var arr = [];
-    for(var i = 2260; i < 2270; i++){
-        fetch("/api/v1/webtoon-api/webtoon/" + i,{method:"GET"}).then((response) => response.json()).then((data) => {
+    for(var i = 0; i < 100; i++){
+        fetch("/api/v1/webtoon-api/webtoon/"+i,{method:"GET"}).then((response) => response.json()).then((data) => {
                         var innerhtml = '<li class="item" id='+data.webtoonId +'><div id="item_img"><img src=' + data.webtoonThumbnail + '></div>' +
-                                        '<div id="item_text"><span><a id="merchansub"></a> <a id="item_name">'+ data.webtoonName+'</a></span></br>'+
-                                        '<span><a id="merchansub"></span></br></div></li>'
-                        $("#webtoonlist").append(innerhtml);
+                                            '<div id="item_text"><span><a id="merchansub"></a> <a id="item_name">'+ data.webtoonName+'</a></span></br>'+
+                                            '<span><a id="merchansub"></span></br></div></li>'
+                            $("#webtoonlist").append(innerhtml);
         })
     }
+    console.log()
 }
 function gotoItem(){
     $('#webtoonlist').on("click","li",function (){
@@ -57,9 +56,10 @@ function Cleaning(bodytag){
 
 function getTypedItem(dtype){
     Cleaning($("#webtoonlist"))
-    if (dtype == 'kakaoPage'){
-        for (var i=2260;i<2270;i++){
+    /*if (dtype == 'kakaoPage'){
+        for (var i=0;i<8600;i++){
             fetch("/api/v1/webtoon-api/webtoon/" + i,{method:"GET"}).then((response) => response.json()).then((data) => {
+                //if (!data) { return; }
                 if (data.platform == '카카오페이지'){
                     var innerhtml = '<li class="item" id='+data.webtoonId +'><div id="item_img"><img src=' + data.webtoonThumbnail + '></div>' +
                                     '<div id="item_text"><span><a id="merchansub"></a> <a id="item_name">'+ data.webtoonName+'</a></span></br>'+
@@ -68,7 +68,7 @@ function getTypedItem(dtype){
                 }
             })
         }
-    }
+    }*/
 
     //url+="?offset=0&limit=30"
     /*fetch(url,{method:"GET"}).then((response) => response.json()).then(

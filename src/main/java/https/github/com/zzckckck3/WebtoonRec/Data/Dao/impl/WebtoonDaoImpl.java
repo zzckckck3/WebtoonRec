@@ -1,8 +1,8 @@
 package https.github.com.zzckckck3.WebtoonRec.Data.Dao.impl;
 
-import https.github.com.zzckckck3.WebtoonRec.Data.Domain.Repository.WebtoonRepository;
 import https.github.com.zzckckck3.WebtoonRec.Data.Dao.WebtoonDao;
 import https.github.com.zzckckck3.WebtoonRec.Data.Domain.Entity.WebtoonEntity;
+import https.github.com.zzckckck3.WebtoonRec.Data.Domain.Repository.WebtoonRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -27,4 +27,5 @@ public class  WebtoonDaoImpl implements WebtoonDao {
         WebtoonEntity webtoonEntity = webtoonRepository.getById(webtoonId); //Id를 기반으로 데이터를 끌어옴
         return webtoonEntity;
     }
+
 }

@@ -30,6 +30,7 @@ public class WebtoonApiController {
         return webtoonService.getWebtoon(webtoonId);
     }
 
+
     @PostMapping(value = "/webtoon")
     public WebtoonDto createWebtoon(@RequestBody WebtoonDto webtoonDto){ //A를 받아 A를 뱉어주는 형식
         String webtoonId = webtoonDto.getWebtoonId();
@@ -44,6 +45,7 @@ public class WebtoonApiController {
 
         return webtoonService.saveWebtoon(webtoonId,webtoonName,webtoonAuthor,webtoonGenre,webtoonSummary,webtoonURL,webtoonThumbnail,webtoonKeyword, platform);
     }
+
 
     @DeleteMapping(value = "/webtoon/{webtoonId}") //사용할일은 거의 없을 듯 하지만 일단 구현
     public WebtoonDto deleteWebtoon(@PathVariable String webtoonId){
