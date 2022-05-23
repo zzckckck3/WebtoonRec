@@ -8,6 +8,8 @@ import https.github.com.zzckckck3.WebtoonRec.Service.WebtoonService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class WebtoonServiceImpl implements WebtoonService {
     WebtoonDataHandler webtoonDataHandler;
@@ -49,4 +51,8 @@ public class WebtoonServiceImpl implements WebtoonService {
         return webtoonDto;
     }
 
+    public WebtoonDto getAllWebtoon(){
+        List<WebtoonEntity> webtoonEntity = webtoonDataHandler.getWebtoonEntityAll();
+        return null;
+    }
 }

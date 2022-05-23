@@ -14,11 +14,11 @@ public class MemberController {
 
     @GetMapping("/user/signup")
     public String dispSignup(){
-        return "/signup";
+        return "/fragments/public/memJoin";
     }
 
     //회원가입 처리
-    @PostMapping("/user/signup")
+    @PostMapping("/user/signup-proc")
     public String execSignup(MemberDto memberDto) {
         memberService.joinUser(memberDto);
 
@@ -27,14 +27,14 @@ public class MemberController {
     // 로그인 페이지
     @GetMapping("/user/login")
     public String dispLogin() {
-        return "/login";
+        return "/fragments/public/memLogin";
     }
 
     // 로그인 결과 페이지
-    @GetMapping("/user/login/result")
+    /*@GetMapping("/")
     public String dispLoginResult() {
-        return "/loginSuccess";
-    }
+        return "/fragments/public/home";
+    }*/
 
     // 로그아웃 결과 페이지
     @GetMapping("/user/logout/result")

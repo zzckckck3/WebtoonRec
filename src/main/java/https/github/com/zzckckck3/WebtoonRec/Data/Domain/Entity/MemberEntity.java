@@ -22,10 +22,14 @@ public class MemberEntity {
     @Column(length = 100, nullable = false)
     private String password;
 
+    @Column
+    private String favWebtoon;
+
     @Builder
-    public MemberEntity(Long id, String email, String password) {
+    public MemberEntity(Long id, String email, String password, String favWebtoon) {
         this.id = id;
         this.email = email;
         this.password = password;
+        this.favWebtoon = favWebtoon;
     }
 }

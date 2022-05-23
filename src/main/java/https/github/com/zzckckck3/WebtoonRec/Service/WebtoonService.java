@@ -11,4 +11,6 @@ public interface WebtoonService { //인터페이스와 class를 찢어놓는것�
 
     //webtoonId,webtoonName,webtoonAuthor,webtoonGenre,webtoonSummary,webtoonURL,webtoonThumbnail,webtoonKeyword
     WebtoonDto getWebtoon(String webtoonId);
+
+    WebtoonDto getAllWebtoon();
 }

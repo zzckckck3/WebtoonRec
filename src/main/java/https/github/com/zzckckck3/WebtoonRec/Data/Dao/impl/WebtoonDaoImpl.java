@@ -6,6 +6,8 @@ import https.github.com.zzckckck3.WebtoonRec.Data.Domain.Repository.WebtoonRepos
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class  WebtoonDaoImpl implements WebtoonDao {
     WebtoonRepository webtoonRepository;
@@ -28,4 +30,9 @@ public class  WebtoonDaoImpl implements WebtoonDao {
         return webtoonEntity;
     }
 
+    @Override
+    public List<WebtoonEntity> getAllWebtoon(){
+        List<WebtoonEntity> webtoonEntity = webtoonRepository.findAll();
+        return webtoonEntity;
+    }
 }

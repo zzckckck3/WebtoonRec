@@ -13,6 +13,7 @@ public class MemberDto {
     private Long id;
     private String email;
     private String password;
+    private String favWebtoon;
     private LocalDateTime createdDate;
     private LocalDateTime modifiedDate;
 
@@ -21,6 +22,7 @@ public class MemberDto {
                 .id(id)
                 .email(email)
                 .password(password)
+                .favWebtoon(favWebtoon)
                 .build();
     }
 
@@ -29,5 +31,6 @@ public class MemberDto {
         this.id = id;
         this.email = email;
         this.password = password;
+        this.favWebtoon = favWebtoon;
     }
 }

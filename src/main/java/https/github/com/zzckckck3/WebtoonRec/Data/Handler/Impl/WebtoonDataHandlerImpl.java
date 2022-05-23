@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
+import java.util.List;
 
 @Service
 @Transactional
@@ -31,5 +32,10 @@ public class WebtoonDataHandlerImpl implements WebtoonDataHandler {
     @Override
     public WebtoonEntity getWebtoonEntity(String webtoonId){
         return webtoonDao.getWebtoon(webtoonId);
+    }
+
+    @Override
+    public List<WebtoonEntity> getWebtoonEntityAll(){
+        return webtoonDao.getAllWebtoon();
     }
 }

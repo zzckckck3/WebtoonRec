@@ -18,8 +18,8 @@ function getItem(){
                             $("#webtoonlist").append(innerhtml);
         })
     }
-    console.log()
 }
+
 function gotoItem(){
     $('#webtoonlist').on("click","li",function (){
         var id=$(this).attr('webtoonId');
