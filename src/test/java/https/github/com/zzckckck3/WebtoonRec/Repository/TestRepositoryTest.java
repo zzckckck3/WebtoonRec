@@ -1,4 +1,4 @@
-package https.github.com.zzckckck3.WebtoonRec.Repository;
+/*package https.github.com.zzckckck3.WebtoonRec.Repository;
 
 import https.github.com.zzckckck3.WebtoonRec.Domain.TestDB;
 import org.junit.jupiter.api.Test;
@@ -23,3 +23,4 @@ public class TestRepositoryTest {
         System.out.println(Id.toString());
     }
 }
+*/

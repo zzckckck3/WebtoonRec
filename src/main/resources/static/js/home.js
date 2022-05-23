@@ -3,37 +3,39 @@ $(document).ready(function(){
     getItem();
     gotoItem();
     categorySetting();
-    SessionCheck();
+    //SessionCheck();
     SearchSetting();
     logoSetting();
-    mypageSetting();
-
+    //mypageSetting();
 })
+
 function getItem(){
-    Cleaning($("#shoplist"));
-    fetch("./api/v2/items/all?offset=0&limit=30",{method:"GET"}).then((response) => response.json()).then(
-        (data) => {
-            $.each(data, function (idx) {
-                var innerhtml = '<li class="item" id='+data[idx].item_ID +'><div id="item_img"><img src=' + data[idx].imgSrc + '></div>' +
-                    '<div id="item_text"><span><a id="merchansub">제목:</a> <a id="item_name">'+data[idx].name+'</a></span></br>'+'<span><a id="merchansub"></span></br></div></li>'
-                $("#shoplist").append(innerhtml);
-            })
+    Cleaning($("#webtoonlist"));
+    var arr = [];
+    for(var i = 2260; i < 2270; i++){
+        fetch("/api/v1/webtoon-api/webtoon/" + i,{method:"GET"}).then((response) => response.json()).then((data) => {
+                        var innerhtml = '<li class="item" id='+data.webtoonId +'><div id="item_img"><img src=' + data.webtoonThumbnail + '></div>' +
+                                        '<div id="item_text"><span><a id="merchansub"></a> <a id="item_name">'+ data.webtoonName+'</a></span></br>'+
+                                        '<span><a id="merchansub"></span></br></div></li>'
+                        $("#webtoonlist").append(innerhtml);
         })
+    }
 }
 function gotoItem(){
-    $('#shoplist').on("click","li",function (){
-        var id=$(this).attr('id');
-        location.assign("./products/"+id);
+    $('#webtoonlist').on("click","li",function (){
+        var id=$(this).attr('webtoonId');
+        location.assign("./webtoon/"+webtoonId);
     })
 }
+
 function categorySetting(){
     $('#category_list').on("click","li",function(){
 
-        if($(this).attr("id")=="default_category"&&$("#shoplist")!=null){
+        if($(this).attr("id")=="default_category"&&$("#webtoonlist")!=null){
             getItem();
         }
         else if($(this).attr("id")!="default_category"){
-            getTypedItem($(this).attr("id"));
+            getTypedItem($(this).attr("id")); //li 의 id값 반환
         }
 
         var rep=document.getElementById("category_list");
@@ -46,39 +48,61 @@ function categorySetting(){
         $(this).css("color","white");
         $(this).css("background-color","black");
         $(this).css("border-radius","3px 3px");
-
-
-
-})
+    })
 }
 function Cleaning(bodytag){
     bodytag.empty();
 
 }
+
 function getTypedItem(dtype){
-    Cleaning($("#shoplist"))
-    var url="./api/v2/items/typed/"
-    if(dtype=="ETC"){
-        url+="ETC"
-    }
-    else if(dtype=="Tool"){
-        url+="cast-tool"
-    }
-    else{
-        url+=dtype[0];
-    }
-    url+="?offset=0&limit=30"
-    fetch(url,{method:"GET"}).then((response) => response.json()).then(
-        (data) => {
-            $.each(data, function (idx) {
-                var innerhtml = '<li class="item" id='+data[idx].item_ID +'><div id="item_img"><img src=' + data[idx].imgSrc + '></div>' +
-                    '<div id="item_text"><span><a id="merchansub">제목:</a> <a id="item_name">'+data[idx].name+'</a></span></br>'+'<span><a id="merchansub"></span></br></div></li>'
-                $("#shoplist").append(innerhtml);
+    Cleaning($("#webtoonlist"))
+    if (dtype == 'kakaoPage'){
+        for (var i=2260;i<2270;i++){
+            fetch("/api/v1/webtoon-api/webtoon/" + i,{method:"GET"}).then((response) => response.json()).then((data) => {
+                if (data.platform == '카카오페이지'){
+                    var innerhtml = '<li class="item" id='+data.webtoonId +'><div id="item_img"><img src=' + data.webtoonThumbnail + '></div>' +
+                                    '<div id="item_text"><span><a id="merchansub"></a> <a id="item_name">'+ data.webtoonName+'</a></span></br>'+
+                                    '<span><a id="merchansub"></span></br></div></li>'
+                                    $("#webtoonlist").append(innerhtml);
+                }
             })
         }
-    )
+    }
 
+    //url+="?offset=0&limit=30"
+    /*fetch(url,{method:"GET"}).then((response) => response.json()).then(
+        (data) => {
+            $.each(data, function (idx) {[idx].imgSrc + '></div>' +
+                        '<div id="item_text"><span><a id="merchansub">제목:</a> <a id="item_name">'+data[idx].name+'</a></span></br>'
+                        +'<span><a id="merchansub"></span></br></div></li>'
+                        $("#webtoonlist").append(innerhtml);
+                var innerhtml = '<li class="item" id='+data[idx].item_ID +'><div id="item_img"><img src=' + data
+            })
+        }
+    )*/
 }
+
+function logoSetting(){
+    $("#logo").click(function(){
+        var baseurl=window.location;
+        window.location.assign(baseurl .protocol +"//"+baseurl .host);
+    })
+}
+
+function SearchSetting(){
+    $("#searchicon").on("click",function(){
+        if($("#searchbar").find("input").val()){
+            var url="/search/"+$("#searchbar").find("input").val();
+            window.location.assign(url);
+        }else{
+            location.reload();
+        }
+
+    })
+}
+
+
 async function SessionCheck(){
     //shoplist 세팅 포함
     var baseurl=window.location;
@@ -105,25 +129,8 @@ async function SessionCheck(){
     }
 
 }
-function SearchSetting(){
-    $("#searchicon").on("click",function(){
-        if($("#searchbar").find("input").val()){
-            var url="/search/"+$("#searchbar").find("input").val();
-            window.location.assign(url);
-        }else{
-            location.reload();
-        }
 
-    })
-}
 
-function logoSetting(){
-    $("#logo").click(function(){
-        var baseurl=window.location;
-        window.location.assign(baseurl .protocol +"//"+baseurl .host);
-    })
-
-}
 function mypageSetting(){
     var baseurl=window.location;
 
