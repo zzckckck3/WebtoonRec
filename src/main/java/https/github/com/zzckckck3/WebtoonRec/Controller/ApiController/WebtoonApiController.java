@@ -1,13 +1,6 @@
 package https.github.com.zzckckck3.WebtoonRec.Controller.ApiController;
 
-import https.github.com.zzckckck3.WebtoonRec.Data.Dto.WebtoonDto;
-import https.github.com.zzckckck3.WebtoonRec.Service.Impl.WebtoonServiceImpl;
-import lombok.extern.slf4j.Slf4j;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.*;
-
+/*
 @RestController
 @RequestMapping("/api/v1/webtoon-api")
 @Slf4j
@@ -50,4 +43,10 @@ public class WebtoonApiController {
     public WebtoonDto deleteWebtoon(@PathVariable Long webtoonId){
         return null;
     }
+
+
+
 }
+
+
+ */

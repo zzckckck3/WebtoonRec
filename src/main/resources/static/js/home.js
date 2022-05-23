@@ -9,15 +9,15 @@ $(document).ready(function(){
 })
 
 function getItem(){
-    Cleaning($("#webtoonlist"));
-    for(var i = 0; i < 100; i++){
-        fetch("/api/v1/webtoon-api/webtoon/"+i,{method:"GET"}).then((response) => response.json()).then((data) => {
-                        var innerhtml = '<li class="item" id='+data.webtoonId +'><div id="item_img"><img src=' + data.webtoonThumbnail + '></div>' +
-                                            '<div id="item_text"><span><a id="merchansub"></a> <a id="item_name">'+ data.webtoonName+'</a></span></br>'+
-                                            '<span><a id="merchansub"></span></br></div></li>'
-                            $("#webtoonlist").append(innerhtml);
+    Cleaning($("#webtoonlist"));    //offset은 1부터 시작
+    fetch("./api/v2/webtoon-api/webtoon/test/all?offset=1&limit=100",{method:"GET"}).then((response) => response.json()).then((data) => {
+        $.each(data, function (idx) {
+                    var innerhtml = '<li class="item" id='+data[idx].webtoonId +'><div id="item_img"><img src=' + data[idx].webtoonThumbnail + '></div>' +
+                                        '<div id="item_text"><span><a id="merchansub"></a> <a id="item_name">'+ data[idx].webtoonName+'</a></span></br>'+
+                                        '<span><a id="merchansub"></span></br></div></li>'
+                        $("#webtoonlist").append(innerhtml);
         })
-    }
+    })
 }
 
 function gotoItem(){

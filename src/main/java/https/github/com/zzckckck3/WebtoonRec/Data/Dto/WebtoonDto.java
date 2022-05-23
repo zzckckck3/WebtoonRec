@@ -19,6 +19,20 @@ public class WebtoonDto {
     private String webtoonKeyword;
     private String platform;
 
+
+    public WebtoonDto( WebtoonEntity entity ){
+
+        this.webtoonId= entity.getWebtoonId();
+        this.webtoonName = entity.getWebtoonName();
+        this.webtoonAuthor = entity.getWebtoonAuthor();
+        this.webtoonGenre = entity.getWebtoonGenre();
+        this.webtoonSummary = entity.getWebtoonSummary();
+        this.webtoonURL= entity.getWebtoonURL();
+        this.webtoonThumbnail = entity.getWebtoonThumbnail();
+        this.webtoonKeyword = entity.getWebtoonKeyword();
+        this.platform = entity.getPlatform();
+    }
+
     public WebtoonEntity toEntity(){
         return WebtoonEntity.builder()
                 .webtoonId(webtoonId)
