@@ -13,6 +13,7 @@
     <script type="text/javascript" src="/js/home.js"></script>
 </head>
 <body>
+
 <div id="wrap">
     <nav id="navi-bar">
         <a id="login-navi" href="/user/login">로그인</a>
@@ -22,7 +23,7 @@
     </nav>
     <div id="bodyheader">
         <div id="mainHeaderbar">
-            <img src="/img/allcategory.png" id="logo">
+            <div id="logo" style="font-size: 40px; margin-top:10px;"><b>ATAD:WR</b></div>
             <div id="searchbar">
                 <input type="text" placeholder="   제목을 검색하세요.">
                 <btn id="searchicon" style="font-size: 0.9rem">
@@ -35,7 +36,15 @@
 
     <hr>
 
-    <div style="height:100x; margin-top: 20px;"><strong>추천 웹툰</strong></div>
+    <div style="height:100x; margin-top: 20px;">
+        <strong>키워드 검색</strong>
+        <div id="keyword-searchbar">
+            <input type="text" placeholder="   키워드를 검색하세요.">
+            <btn id="keyword-searchicon" style="font-size: 0.7rem">
+                <i class="fa-solid fa-magnifying-glass fa-2x"></i></span>
+            </btn>
+        </div>
+    </div>
     <hr>
     <!--
     <select id="dataPerPage">
@@ -57,7 +66,16 @@
         </ul>
 
     </div>
+
     <div style="margin-top:40px;"></div>
+
+    <btn id="list-left" style="font-size: 5rem" onclick="previousPage()">
+        <i class="fa-solid fa-angle-left"></i>
+    </btn>
+    <btn id="list-right" style="font-size: 5rem" onclick="nextPage()">
+        <i class="fa-solid fa-angle-right"></i>
+    </btn>
+
     <ul id="webtoonlist">
 
         <!--li class="item">

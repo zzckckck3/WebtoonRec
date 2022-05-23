@@ -23,6 +23,10 @@ public class WebtoonCsRepository {
     }
 
     public List<WebtoonEntity> findAllwithKeyword( String keyword ){
-        return em.createQuery("select w from WebotoonEntity w where w.webtoon_keyword like concat('%',:keyword,'%')").setParameter("keyword",keyword ).getResultList();
+        return em.createQuery("select w from WebtoonEntity w where w.webtoon_keyword like concat('%',:keyword,'%')").setParameter("keyword",keyword ).getResultList();
+    }
+
+    public List<WebtoonEntity> findAllwithName( String name ){
+        return em.createQuery("select w from WebtoonEntity w where w.webtoon_name like %@name%").setParameter("name", name).getResultList();
     }
 }

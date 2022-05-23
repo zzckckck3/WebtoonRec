@@ -1,3 +1,6 @@
+var itemOffset = 1;
+var itemLimit = 100;
+
 $(document).ready(function(){
     getItem();
     gotoItem();
@@ -6,11 +9,42 @@ $(document).ready(function(){
     SearchSetting();
     logoSetting();
     //mypageSetting();
+
 })
+
+function previousPage(){
+    if(itemOffset > 100){
+        itemOffset = itemOffset - 100;
+        Cleaning($("#webtoonlist"));
+        fetch("./api/v2/webtoon-api/webtoon/all?offset="+itemOffset+"&limit="+itemLimit,{method:"GET"}).then((response) => response.json()).then((data) => {
+            $.each(data, function (idx) {
+                var innerhtml = '<li class="item" id='+data[idx].webtoonId +'><div id="item_img"><img src=' + data[idx].webtoonThumbnail + '></div>' +
+                                '<div id="item_text"><span><a id="merchansub"></a> <a id="item_name">'+ data[idx].webtoonName+'</a></span></br>'+
+                                '<span><a id="merchansub"></span></br></div></li>'
+                                $("#webtoonlist").append(innerhtml);
+                })
+            })
+    }
+}
+
+function nextPage(){
+    if(itemOffset < 8500){
+        itemOffset = itemOffset + 100;
+        Cleaning($("#webtoonlist"));
+        fetch("./api/v2/webtoon-api/webtoon/all?offset="+itemOffset+"&limit="+itemLimit,{method:"GET"}).then((response) => response.json()).then((data) => {
+            $.each(data, function (idx) {
+                var innerhtml = '<li class="item" id='+data[idx].webtoonId +'><div id="item_img"><img src=' + data[idx].webtoonThumbnail + '></div>' +
+                                '<div id="item_text"><span><a id="merchansub"></a> <a id="item_name">'+ data[idx].webtoonName+'</a></span></br>'+
+                                '<span><a id="merchansub"></span></br></div></li>'
+                                $("#webtoonlist").append(innerhtml);
+                })
+            })
+    }
+}
 
 function getItem(){
     Cleaning($("#webtoonlist"));    //offset은 1부터 시작
-    fetch("./api/v2/webtoon-api/webtoon/test/all?offset=1&limit=100",{method:"GET"}).then((response) => response.json()).then((data) => {
+    fetch("./api/v2/webtoon-api/webtoon/all?offset="+itemOffset+"&limit="+itemLimit,{method:"GET"}).then((response) => response.json()).then((data) => {
         $.each(data, function (idx) {
                     var innerhtml = '<li class="item" id='+data[idx].webtoonId +'><div id="item_img"><img src=' + data[idx].webtoonThumbnail + '></div>' +
                                         '<div id="item_text"><span><a id="merchansub"></a> <a id="item_name">'+ data[idx].webtoonName+'</a></span></br>'+

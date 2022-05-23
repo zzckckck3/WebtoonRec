@@ -19,6 +19,11 @@ public class WebtoonService2 {
     public List<WebtoonEntity> findAllwithKeyword( String keyword ){
         return csRepository.findAllwithKeyword( keyword );
     }
+
+    public List<WebtoonEntity> findAllwithName( String name ){
+        return csRepository.findAllwithName(name);
+    }
+
     public List<WebtoonEntity> findAll2( ){
         return csRepository.findAlll();
     }

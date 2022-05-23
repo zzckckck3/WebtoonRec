@@ -19,18 +19,27 @@ import java.util.stream.Collectors;
 public class WebtoonCsApiController {
     private final WebtoonService2 webtoonService2;
 
-    @GetMapping("/webtoon/test/all")
+    @GetMapping("/webtoon/all")
     public List<WebtoonDto> findAllbyCs(@RequestParam int offset, @RequestParam int limit){
         List<WebtoonEntity> datas = webtoonService2.findAll( offset , limit );
-        //System.out.println( datas.get( 0 ).getWebtoonSummary());
+        System.out.println( datas.get( 0 ).getWebtoonSummary());
         List<WebtoonDto> dtoList = datas.stream().map( WebtoonDto::new ).collect(Collectors.toList());
         return dtoList;
     }
 
-        @GetMapping("/webtoon/test2/all")
+    @GetMapping("/webtoon/allkeyword")
     public List<WebtoonDto> findAllbykeyword(@RequestParam String keyword,@RequestParam int limit){
         List<WebtoonEntity> datas = webtoonService2.findAll2();
         List<WebtoonEntity> ClusteredDatas = datas.stream().filter( webtoonEntity -> webtoonEntity.getWebtoonKeyword().contains( keyword ) ).collect(Collectors.toList());
+
+        List<WebtoonDto> dtoList = ClusteredDatas.stream().map( WebtoonDto::new ).collect(Collectors.toList());
+        return dtoList;
+    }
+
+    @GetMapping("/webtoon/allname")
+    public List<WebtoonDto> findAllbyName(@RequestParam String name,@RequestParam int limit){
+        List<WebtoonEntity> datas = webtoonService2.findAll2();
+        List<WebtoonEntity> ClusteredDatas = datas.stream().filter( webtoonEntity -> webtoonEntity.getWebtoonName().contains( name ) ).collect(Collectors.toList());
 
         List<WebtoonDto> dtoList = ClusteredDatas.stream().map( WebtoonDto::new ).collect(Collectors.toList());
         return dtoList;
