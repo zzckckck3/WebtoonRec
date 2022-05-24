@@ -1,10 +1,8 @@
-var itemOffset = 1;
-var itemLimit = 100;
-
 $(document).ready(function(){
-    getItem();
+    var titleword = TitlewordCheck();
     gotoItem();
     categorySetting();
+    SearchByTitleWord(titleword);
     //SessionCheck();
     SearchSetting();
     KeySearchSetting();
@@ -13,46 +11,34 @@ $(document).ready(function(){
 
 })
 
-function previousPage(){
-    if(itemOffset > 100){
-        itemOffset = itemOffset - 100;
-        Cleaning($("#webtoonlist"));
-        fetch("./api/v2/webtoon-api/webtoon/all?offset="+itemOffset+"&limit="+itemLimit,{method:"GET"}).then((response) => response.json()).then((data) => {
+function TitlewordCheck(){
+    var baseurl=window.location;
+    var locate=baseurl .protocol +"//"+baseurl .host+"/search/"
+    var str=baseurl.toString();
+    var titleword=str.substr(locate.length,str.length);
+    titleword=decodeURI(titleword);
+    $("#searchbar").find("input").attr("value",titleword)
+    return titleword;
+}
+function SearchByTitleWord(titleword){
+    getItembytitleword(titleword);
+}
+
+
+async function getItembytitleword(titleword){
+    var url="/api/v2/webtoon-api/webtoon/allname?limit=100&name="+titleword;
+    await fetch(url,{method:"get"}).then(response => response.json()).then(
+        data => {
+            var baseurl=window.location
             $.each(data, function (idx) {
                 var innerhtml = '<li class="item" id='+data[idx].webtoonId +'><div id="item_img"><img src=' + data[idx].webtoonThumbnail + '></div>' +
                                 '<div id="item_text"><span><a id="merchansub"></a> <a id="item_name">'+ data[idx].webtoonName+'</a></span></br>'+
                                 '<span><a id="merchansub"></span></br></div></li>'
                                 $("#webtoonlist").append(innerhtml);
-                })
             })
-    }
-}
-
-function nextPage(){
-    if(itemOffset < 8500){
-        itemOffset = itemOffset + 100;
-        Cleaning($("#webtoonlist"));
-        fetch("./api/v2/webtoon-api/webtoon/all?offset="+itemOffset+"&limit="+itemLimit,{method:"GET"}).then((response) => response.json()).then((data) => {
-            $.each(data, function (idx) {
-                var innerhtml = '<li class="item" id='+data[idx].webtoonId +'><div id="item_img"><img src=' + data[idx].webtoonThumbnail + '></div>' +
-                                '<div id="item_text"><span><a id="merchansub"></a> <a id="item_name">'+ data[idx].webtoonName+'</a></span></br>'+
-                                '<span><a id="merchansub"></span></br></div></li>'
-                                $("#webtoonlist").append(innerhtml);
-                })
-            })
-    }
-}
-
-function getItem(){
-    Cleaning($("#webtoonlist"));    //offset은 1부터 시작
-    fetch("./api/v2/webtoon-api/webtoon/all?offset="+itemOffset+"&limit="+itemLimit,{method:"GET"}).then((response) => response.json()).then((data) => {
-        $.each(data, function (idx) {
-                    var innerhtml = '<li class="item" id='+data[idx].webtoonId +'><div id="item_img"><img src=' + data[idx].webtoonThumbnail + '></div>' +
-                                        '<div id="item_text"><span><a id="merchansub"></a> <a id="item_name">'+ data[idx].webtoonName+'</a></span></br>'+
-                                        '<span><a id="merchansub"></span></br></div></li>'
-                        $("#webtoonlist").append(innerhtml);
-        })
-    })
+            //$("#explain_part").append('<span><mark>'+keyword+'</mark>'+"(으)로 검색한 결과, 총 "+'<mark>'+data.length+'</mark>'+ "건 입니다."+'</span>');
+        }
+    )
 }
 
 function gotoItem(){
@@ -84,6 +70,7 @@ function categorySetting(){
         $(this).css("border-radius","3px 3px");
     })
 }
+
 function Cleaning(bodytag){
     bodytag.empty();
 
@@ -136,6 +123,7 @@ function SearchSetting(){
 
     })
 }
+
 function KeySearchSetting(){
     $("#keyword-searchicon").on("click",function(){
         if($("#keyword-searchbar").find("input").val()){
@@ -147,6 +135,7 @@ function KeySearchSetting(){
 
     })
 }
+
 async function SessionCheck(){
     //shoplist 세팅 포함
     var baseurl=window.location;

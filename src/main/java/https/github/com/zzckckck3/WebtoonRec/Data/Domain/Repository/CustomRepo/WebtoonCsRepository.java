@@ -29,4 +29,9 @@ public class WebtoonCsRepository {
     public List<WebtoonEntity> findAllwithName( String name ){
         return em.createQuery("select w from WebtoonEntity w where w.webtoon_name like %@name%").setParameter("name", name).getResultList();
     }
+
+    public WebtoonEntity findWebtoon(String id){
+        return em.find(WebtoonEntity.class, id);
+    }
+
 }
