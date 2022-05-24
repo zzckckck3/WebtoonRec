@@ -1,3 +1,5 @@
+var itemOffset = 1;
+var itemLimit = 100;
 
 $(document).ready(function(){
     getItem();
@@ -7,20 +9,51 @@ $(document).ready(function(){
     SearchSetting();
     logoSetting();
     //mypageSetting();
+
 })
 
+function previousPage(){
+    if(itemOffset > 100){
+        itemOffset = itemOffset - 100;
+        Cleaning($("#webtoonlist"));
+        fetch("./api/v2/webtoon-api/webtoon/all?offset="+itemOffset+"&limit="+itemLimit,{method:"GET"}).then((response) => response.json()).then((data) => {
+            $.each(data, function (idx) {
+                var innerhtml = '<li class="item" id='+data[idx].webtoonId +'><div id="item_img"><img src=' + data[idx].webtoonThumbnail + '></div>' +
+                                '<div id="item_text"><span><a id="merchansub"></a> <a id="item_name">'+ data[idx].webtoonName+'</a></span></br>'+
+                                '<span><a id="merchansub"></span></br></div></li>'
+                                $("#webtoonlist").append(innerhtml);
+                })
+            })
+    }
+}
+
+function nextPage(){
+    if(itemOffset < 8500){
+        itemOffset = itemOffset + 100;
+        Cleaning($("#webtoonlist"));
+        fetch("./api/v2/webtoon-api/webtoon/all?offset="+itemOffset+"&limit="+itemLimit,{method:"GET"}).then((response) => response.json()).then((data) => {
+            $.each(data, function (idx) {
+                var innerhtml = '<li class="item" id='+data[idx].webtoonId +'><div id="item_img"><img src=' + data[idx].webtoonThumbnail + '></div>' +
+                                '<div id="item_text"><span><a id="merchansub"></a> <a id="item_name">'+ data[idx].webtoonName+'</a></span></br>'+
+                                '<span><a id="merchansub"></span></br></div></li>'
+                                $("#webtoonlist").append(innerhtml);
+                })
+            })
+    }
+}
+
 function getItem(){
-    Cleaning($("#webtoonlist"));
-    var arr = [];
-    for(var i = 2260; i < 2270; i++){
-        fetch("/api/v1/webtoon-api/webtoon/" + i,{method:"GET"}).then((response) => response.json()).then((data) => {
-                        var innerhtml = '<li class="item" id='+data.webtoonId +'><div id="item_img"><img src=' + data.webtoonThumbnail + '></div>' +
-                                        '<div id="item_text"><span><a id="merchansub"></a> <a id="item_name">'+ data.webtoonName+'</a></span></br>'+
+    Cleaning($("#webtoonlist"));    //offset은 1부터 시작
+    fetch("./api/v2/webtoon-api/webtoon/all?offset="+itemOffset+"&limit="+itemLimit,{method:"GET"}).then((response) => response.json()).then((data) => {
+        $.each(data, function (idx) {
+                    var innerhtml = '<li class="item" id='+data[idx].webtoonId +'><div id="item_img"><img src=' + data[idx].webtoonThumbnail + '></div>' +
+                                        '<div id="item_text"><span><a id="merchansub"></a> <a id="item_name">'+ data[idx].webtoonName+'</a></span></br>'+
                                         '<span><a id="merchansub"></span></br></div></li>'
                         $("#webtoonlist").append(innerhtml);
         })
-    }
+    })
 }
+
 function gotoItem(){
     $('#webtoonlist').on("click","li",function (){
         var id=$(this).attr('webtoonId');
@@ -57,9 +90,10 @@ function Cleaning(bodytag){
 
 function getTypedItem(dtype){
     Cleaning($("#webtoonlist"))
-    if (dtype == 'kakaoPage'){
-        for (var i=2260;i<2270;i++){
+    /*if (dtype == 'kakaoPage'){
+        for (var i=0;i<8600;i++){
             fetch("/api/v1/webtoon-api/webtoon/" + i,{method:"GET"}).then((response) => response.json()).then((data) => {
+                //if (!data) { return; }
                 if (data.platform == '카카오페이지'){
                     var innerhtml = '<li class="item" id='+data.webtoonId +'><div id="item_img"><img src=' + data.webtoonThumbnail + '></div>' +
                                     '<div id="item_text"><span><a id="merchansub"></a> <a id="item_name">'+ data.webtoonName+'</a></span></br>'+
@@ -68,7 +102,7 @@ function getTypedItem(dtype){
                 }
             })
         }
-    }
+    }*/
 
     //url+="?offset=0&limit=30"
     /*fetch(url,{method:"GET"}).then((response) => response.json()).then(
