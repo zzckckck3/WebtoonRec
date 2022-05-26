@@ -1,5 +1,5 @@
 $(document).ready(function(){
-    var keyword =KeyWordCheck();
+    var keyword = KeyWordCheck();
     gotoItem();
     categorySetting();
     SearchByKeyWord(keyword);
