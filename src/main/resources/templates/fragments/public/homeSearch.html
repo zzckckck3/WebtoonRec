@@ -15,12 +15,6 @@
 <body>
 
 <div id="wrap">
-    <nav id="navi-bar">
-        <a id="login-navi" href="/user/login">로그인</a>
-        <a id="join-navi" href="/user/signup">회원가입</a>
-        <a id="mypage">마이페이지</a> <!--미구현-->
-        <a href="/contact">FAQ</a> <!--미구현-->
-    </nav>
     <div id="bodyheader">
         <div id="mainHeaderbar">
             <div id="logo" style="font-size: 40px; margin-top:10px;"><b>ATAD:WR</b></div>
@@ -37,7 +31,15 @@
     <hr>
 
     <div style="height:100x; margin-top: 20px;">
-        <strong>키워드 검색</strong>
+        <strong>키워드 검색</strong><br>
+        <div id="userinfo">
+            <nav id="navi-bar">
+                <a id="login-navi" href="/user/login"><button>로그인</button></a>
+                <a id="join-navi" href="/user/signup"><button>회원가입</button></a>
+                <a id="mypage"><button>마이페이지</button></a> <!--미구현-->
+                <!--<a href="/contact">FAQ</a> 미구현-->
+            </nav>
+        </div>
         <div id="keyword-searchbar">
             <input type="text" placeholder="   키워드를 검색하세요.">
             <btn id="keyword-searchicon" style="font-size: 0.7rem">

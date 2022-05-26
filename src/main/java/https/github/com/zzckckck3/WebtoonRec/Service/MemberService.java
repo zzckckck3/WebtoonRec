@@ -1,39 +1,60 @@
 package https.github.com.zzckckck3.WebtoonRec.Service;
 
+
 import https.github.com.zzckckck3.WebtoonRec.Data.Domain.Entity.MemberEntity;
-import https.github.com.zzckckck3.WebtoonRec.Data.Domain.Entity.Role;
-import https.github.com.zzckckck3.WebtoonRec.Data.Domain.Repository.MemberRepository;
-import https.github.com.zzckckck3.WebtoonRec.Data.Dto.MemberDto;
-import lombok.AllArgsConstructor;
-import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import https.github.com.zzckckck3.WebtoonRec.Data.Domain.Repository.CustomRepo.MemberCsRepository;
+import org.springframework.context.annotation.Lazy;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
-import javax.transaction.Transactional;
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
 @Service
-@AllArgsConstructor
+//@RequiredArgsConstructor
+@Transactional(readOnly = true)
 public class MemberService implements UserDetailsService {
-    private MemberRepository memberRepository;
+    private final MemberCsRepository memberCsRepository;
+    private final PasswordEncoder passwordEncoder;
 
-    @Transactional
-    public Long joinUser(MemberDto memberDto) {
-        //암호화
-        BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
-        memberDto.setPassword(passwordEncoder.encode(memberDto.getPassword()));
-
-        return memberRepository.save(memberDto.toEntity()).getId();
+    MemberService (@Lazy MemberCsRepository memberCsRepository, @Lazy PasswordEncoder passwordEncoder){
+        this.memberCsRepository = memberCsRepository;
+        this.passwordEncoder = passwordEncoder;
     }
 
-    @Override
+    @Transactional
+    public Long save(MemberEntity memberEntity){
+        memberEntity.Encodedpassword(passwordEncoder);
+        Long saveid = memberCsRepository.save(memberEntity);
+        return saveid;
+    }
+
+    public List<MemberEntity> findAll(int offset, int limit){
+        return memberCsRepository.findAll(offset, limit);
+    }
+
+    @Override //login
+    public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException{
+        MemberEntity memberEntity = memberCsRepository.findByEmail(email);
+        System.out.println(memberEntity.getRoleType());
+        if(memberEntity==null){
+            throw new UsernameNotFoundException(email);
+        }
+        return User.builder().username(memberEntity.getEmail()).password(memberEntity.getPassword()).roles(memberEntity.getRoleType().toString()).build();
+    }
+
+    public PasswordEncoder getPasswordEncoder(){
+        return passwordEncoder;
+    }
+
+    public MemberEntity findByEmail(String email){
+        return memberCsRepository.findByEmail(email);
+    }
+    /*@Override
     public UserDetails loadUserByUsername(String userEmail) throws UsernameNotFoundException{
         Optional<MemberEntity> userEntityWrapper = memberRepository.findByEmail(userEmail);
         MemberEntity memberEntity = userEntityWrapper.get();
@@ -41,13 +62,11 @@ public class MemberService implements UserDetailsService {
         List<GrantedAuthority> authorities = new ArrayList<>();
 
         if(("zzckxkck1@gmail.com").equals(userEmail)){
-            authorities.add(new SimpleGrantedAuthority(Role.ADMIN.getValue()));
+            authorities.add(new SimpleGrantedAuthority(RoleType.ADMIN.getValue()));
         } else {
-            authorities.add(new SimpleGrantedAuthority(Role.MEMBER.getValue()));
+            authorities.add(new SimpleGrantedAuthority(RoleType.MEMBER.getValue()));
         }
 
         return new User(memberEntity.getEmail(), memberEntity.getPassword(), authorities);
-    }
-
-
+    }*/
 }

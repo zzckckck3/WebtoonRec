@@ -1,7 +1,9 @@
 package https.github.com.zzckckck3.WebtoonRec.Data.Dto;
 
-import https.github.com.zzckckck3.WebtoonRec.Data.Domain.Entity.MemberEntity;
-import lombok.*;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+import lombok.ToString;
 
 import java.time.LocalDateTime;
 
@@ -17,18 +19,7 @@ public class MemberDto {
     private LocalDateTime createdDate;
     private LocalDateTime modifiedDate;
 
-    public MemberEntity toEntity(){
-        return MemberEntity.builder()
-                .id(id)
-                .email(email)
-                .password(password)
-                .favWebtoon(favWebtoon)
-                .build();
-    }
-
-    @Builder
-    public MemberDto(Long id, String email, String password){
-        this.id = id;
+    public MemberDto(String email, String password, String favWebtoon){
         this.email = email;
         this.password = password;
         this.favWebtoon = favWebtoon;

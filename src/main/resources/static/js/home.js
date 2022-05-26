@@ -24,6 +24,8 @@ function previousPage(){
                                 '<span><a id="merchansub"></span></br></div></li>'
                                 $("#webtoonlist").append(innerhtml);
                 })
+                var divmargin = '<li class="item_margin"><div"> </div></li>';
+                $("#webtoonlist").append(divmargin);
             })
     }
 }
@@ -39,6 +41,8 @@ function nextPage(){
                                 '<span><a id="merchansub"></span></br></div></li>'
                                 $("#webtoonlist").append(innerhtml);
                 })
+                var divmargin = '<li class="item_margin"><div"> </div></li>';
+                $("#webtoonlist").append(divmargin);
             })
     }
 }
@@ -52,13 +56,15 @@ function getItem(){
                                         '<span><a id="merchansub"></span></br></div></li>'
                         $("#webtoonlist").append(innerhtml);
         })
+        var divmargin = '<li class="item_margin"><div"> </div></li>';
+        $("#webtoonlist").append(divmargin);
     })
 }
 
 function gotoItem(){
     $('#webtoonlist').on("click","li",function (){
-        var id=$(this).attr('webtoonId');
-        location.assign("./webtoon/"+webtoonId);
+        var webtoonId = $(this).attr('id');
+        location.assign("/webtoon/"+webtoonId);
     })
 }
 
