@@ -56,16 +56,37 @@
     <div class="webtoon-outer-container">
         <div id="webtoon-image-container">
             <img src="" id="webtoon-image">
+            <button id="addbtn">관심웹툰추가</button>
         </div>
         <div id="webtoon-info-container">
+            <div style="margin-top:20px;"></div>
             <div class="webtoon-info-inner" id="webtoon-name"><b>웹툰 제목</b></div>
             <div class="webtoon-info-inner" id="webtoon-platform">플랫폼</div>
             <div class="webtoon-info-inner" id="webtoon-author">작가</div>
             <div class="custom-hr"></div>
-            <div class="webtoon-info-inner" id="webtoon-summary">줄거리</div>
-            <div class="custom-hr"></div>
             <div class="webtoon-info-inner" id="webtoon-genre">장르</div>
-            <div class="webtoon-info-inner" id="addbtn"><button>관심웹툰추가</button></div>
+        </div>
+        <div id="webtoon-summary-container">
+            <div class="webtoon-summary-inner" id="webtoon-summary">
+                줄거리
+            </div>
+            <details id="recommend-keyword-details">
+                <summary id="recommend-keyword">유사 장르 웹툰</summary>
+                <p id="webtoon-keyword"></p>
+                <ul id="webtoonlist">
+
+                    <!--li class="item">
+                        <div id="item_img">
+                            <img src="img/aakvndksvnsdlv.jpg">
+                        </div>
+                        <div id="item_text">
+                            <a id="item_name">d</a></br>
+                            <button>바로가기</button>
+                        </div>
+                    </li-->
+
+                </ul>
+            </details>
         </div>
     </div>
 

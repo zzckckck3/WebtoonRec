@@ -226,7 +226,16 @@ hr{
     cursor:pointer;
     margin-top:0;
     width:160px;
-    height:200px;
+    height:240px;
+    margin-left:12.5px;
+    margin-right:12.5px;
+    margin-bottom: 10px;
+    border-bottom-left: soild 1px red;
+}
+#webtoonlist li.item_margin{
+    margin-top:0;
+    width:160px;
+    height:100px;
     margin-left:12.5px;
     margin-right:12.5px;
     margin-bottom: 10px;
@@ -268,6 +277,7 @@ li #item_img img{
 }
 #item_name{
     font-weight: bold;
+    font-size: 14px;
 }
 #item_price {
     color:red;
