@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=0.5, user-scalable=yes, maximum-scale=1.0">
+  <title>Webtoon Recommend</title>
+  <link type="text/css" rel="stylesheet" href="/css/home.css">
+  <link href="https://fonts.googleapis.com/css2?family=Do+Hyeon&family=Jua&display=swap" rel="stylesheet">
+  <script src="https://kit.fontawesome.com/97e36fce94.js" crossorigin="anonymous"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+  <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+  <script type="text/javascript" src="/js/homeKeySearch.js"></script>
+</head>
+<body>
+
+<div id="wrap">
+  <div id="bodyheader">
+    <div id="mainHeaderbar">
+      <div id="logo" style="font-size: 40px; margin-top:10px;"><b>ATAD:WR</b></div>
+      <div id="searchbar">
+        <input type="text" placeholder="   제목을 검색하세요.">
+        <btn id="searchicon" style="font-size: 0.9rem">
+          <i class="fa-solid fa-magnifying-glass fa-2x"></i></span>
+        </btn>
+      </div>
+      <div id="mypage_btn" style="font-size: 0.9rem"><i class="fa-solid fa-user-gear fa-2x"></i></div>
+    </div>
+  </div>
+
+  <hr>
+
+  <div style="height:100x; margin-top: 20px;">
+    <strong>키워드 검색</strong><br>
+    <div id="userinfo">
+      <nav id="navi-bar">
+        <a id="login-navi" href="/user/login"><button>로그인</button></a>
+        <a id="join-navi" href="/user/signup"><button>회원가입</button></a>
+        <a id="mypage"><button>마이페이지</button></a> <!--미구현-->
+        <!--<a href="/contact">FAQ</a> 미구현-->
+      </nav>
+    </div>
+    <div id="keyword-searchbar">
+      <input type="text" placeholder="   키워드를 검색하세요.">
+      <btn id="keyword-searchicon" style="font-size: 0.7rem">
+        <i class="fa-solid fa-magnifying-glass fa-2x"></i></span>
+      </btn>
+    </div>
+  </div>
+  <hr>
+  <!--
+  <select id="dataPerPage">
+      <option value="10">10개씩보기</option>
+      <option value="15">15개씩보기</option>
+      <option value="20">20개씩보기</option>
+  </select>
+  -->
+  <div id="category_part">
+
+    <ul id="category_list">
+      <li id="default_category">전체 보기</li>
+      <li id="naverWebtoon" style="margin-top:3px;">네이버웹툰</li>
+      <li id="kakaoWebtoon" style="margin-top:3px;">카카오웹툰</li>
+      <li id="kakaoPage" style="margin-top:3px;">카카오페이지</li>
+      <li id="lezhinComics" style="margin-top:3px;">레진코믹스</li>
+
+
+    </ul>
+
+  </div>
+
+  <div style="margin-top:40px;"></div>
+  <!--
+  <btn id="list-left" style="font-size: 5rem" onclick="previousPage()">
+      <i class="fa-solid fa-angle-left"></i>
+  </btn>
+  <btn id="list-right" style="font-size: 5rem" onclick="nextPage()">
+      <i class="fa-solid fa-angle-right"></i>
+  </btn>
+  -->
+  <ul id="webtoonlist">
+
+    <!--li class="item">
+        <div id="item_img">
+            <img src="img/aakvndksvnsdlv.jpg">
+        </div>
+        <div id="item_text">
+            <a id="item_name">d</a></br>
+            <button>바로가기</button>
+        </div>
+    </li-->
+  </ul>
+  <ul id="pagingul">
+  </ul>
+
+</div>
+</body>
+</html>

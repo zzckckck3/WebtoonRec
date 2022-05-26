@@ -10,12 +10,11 @@
     <script src="https://kit.fontawesome.com/97e36fce94.js" crossorigin="anonymous"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
-    <script type="text/javascript" src="/js/home.js"></script>
+    <script type="text/javascript" src="/js/homeSearch.js"></script>
 </head>
 <body>
 
 <div id="wrap">
-
     <div id="bodyheader">
         <div id="mainHeaderbar">
             <div id="logo" style="font-size: 40px; margin-top:10px;"><b>ATAD:WR</b></div>
@@ -71,14 +70,14 @@
     </div>
 
     <div style="margin-top:40px;"></div>
-
-    <btn id="list-left" style="font-size: 2rem" onclick="previousPage()">
-        <i class="fa-solid fa-circle-left"></i>
+    <!--
+    <btn id="list-left" style="font-size: 5rem" onclick="previousPage()">
+        <i class="fa-solid fa-angle-left"></i>
     </btn>
-    <btn id="list-right" style="font-size: 2rem" onclick="nextPage()">
-        <i class="fa-solid fa-circle-right"></i>
+    <btn id="list-right" style="font-size: 5rem" onclick="nextPage()">
+        <i class="fa-solid fa-angle-right"></i>
     </btn>
-
+    -->
     <ul id="webtoonlist">
 
         <!--li class="item">
@@ -90,9 +89,9 @@
                 <button>바로가기</button>
             </div>
         </li-->
-
     </ul>
-
+    <ul id="pagingul">
+    </ul>
 
 </div>
 </body>

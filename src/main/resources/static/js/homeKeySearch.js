@@ -1,70 +1,48 @@
-var itemOffset = 1;
-var itemLimit = 100;
-
 $(document).ready(function(){
-    getItem();
+    var keyword =KeyWordCheck();
     gotoItem();
     categorySetting();
+    SearchByKeyWord(keyword);
     //SessionCheck();
     SearchSetting();
     KeySearchSetting();
     logoSetting();
     //mypageSetting();
-
 })
 
-function previousPage(){
-    if(itemOffset > 100){
-        itemOffset = itemOffset - 100;
-        Cleaning($("#webtoonlist"));
-        fetch("./api/v2/webtoon-api/webtoon/all?offset="+itemOffset+"&limit="+itemLimit,{method:"GET"}).then((response) => response.json()).then((data) => {
+function KeyWordCheck(){
+    var baseurl=window.location;
+    var locate=baseurl .protocol +"//"+baseurl .host+"/keysearch/"
+    var str=baseurl.toString();
+    var Keyword=str.substr(locate.length,str.length);
+    Keyword=decodeURI(Keyword);
+    $("#keyword-searchbar").find("input").attr("value",Keyword)
+    return Keyword;
+}
+
+function SearchByKeyWord(keyword){
+    getItembykeyword(keyword);
+}
+
+async function getItembykeyword(keyword){
+    var url="/api/v2/webtoon-api/webtoon/allkeyword?keyword=" + keyword + "&limit=200";
+    await fetch(url,{method:"get"}).then(response => response.json()).then(
+        data => {
+            var baseurl=window.location
             $.each(data, function (idx) {
                 var innerhtml = '<li class="item" id='+data[idx].webtoonId +'><div id="item_img"><img src=' + data[idx].webtoonThumbnail + '></div>' +
                                 '<div id="item_text"><span><a id="merchansub"></a> <a id="item_name">'+ data[idx].webtoonName+'</a></span></br>'+
                                 '<span><a id="merchansub"></span></br></div></li>'
                                 $("#webtoonlist").append(innerhtml);
-                })
-                var divmargin = '<li class="item_margin"><div"> </div></li>';
-                $("#webtoonlist").append(divmargin);
             })
-    }
-}
-
-function nextPage(){
-    if(itemOffset < 8500){
-        itemOffset = itemOffset + 100;
-        Cleaning($("#webtoonlist"));
-        fetch("./api/v2/webtoon-api/webtoon/all?offset="+itemOffset+"&limit="+itemLimit,{method:"GET"}).then((response) => response.json()).then((data) => {
-            $.each(data, function (idx) {
-                var innerhtml = '<li class="item" id='+data[idx].webtoonId +'><div id="item_img"><img src=' + data[idx].webtoonThumbnail + '></div>' +
-                                '<div id="item_text"><span><a id="merchansub"></a> <a id="item_name">'+ data[idx].webtoonName+'</a></span></br>'+
-                                '<span><a id="merchansub"></span></br></div></li>'
-                                $("#webtoonlist").append(innerhtml);
-                })
-                var divmargin = '<li class="item_margin"><div"> </div></li>';
-                $("#webtoonlist").append(divmargin);
-            })
-    }
-}
-
-function getItem(){
-    Cleaning($("#webtoonlist"));    //offset은 1부터 시작
-    fetch("./api/v2/webtoon-api/webtoon/all?offset="+itemOffset+"&limit="+itemLimit,{method:"GET"}).then((response) => response.json()).then((data) => {
-        $.each(data, function (idx) {
-                    var innerhtml = '<li class="item" id='+data[idx].webtoonId +'><div id="item_img"><img src=' + data[idx].webtoonThumbnail + '></div>' +
-                                        '<div id="item_text"><span><a id="merchansub"></a> <a id="item_name">'+ data[idx].webtoonName+'</a></span></br>'+
-                                        '<span><a id="merchansub"></span></br></div></li>'
-                        $("#webtoonlist").append(innerhtml);
-        })
-        var divmargin = '<li class="item_margin"><div"> </div></li>';
-        $("#webtoonlist").append(divmargin);
-    })
+        }
+    )
 }
 
 function gotoItem(){
     $('#webtoonlist').on("click","li",function (){
-        var webtoonId = $(this).attr('id');
-        location.assign("/webtoon/"+webtoonId);
+        var id=$(this).attr('webtoonId');
+        location.assign("./webtoon/"+webtoonId);
     })
 }
 
@@ -90,6 +68,7 @@ function categorySetting(){
         $(this).css("border-radius","3px 3px");
     })
 }
+
 function Cleaning(bodytag){
     bodytag.empty();
 
@@ -139,9 +118,9 @@ function SearchSetting(){
         }else{
             location.reload();
         }
-
     })
 }
+
 function KeySearchSetting(){
     $("#keyword-searchicon").on("click",function(){
         if($("#keyword-searchbar").find("input").val()){
@@ -153,6 +132,7 @@ function KeySearchSetting(){
 
     })
 }
+
 async function SessionCheck(){
     //shoplist 세팅 포함
     var baseurl=window.location;
