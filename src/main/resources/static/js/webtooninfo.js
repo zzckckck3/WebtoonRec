@@ -1,5 +1,3 @@
-var thisKeyword = [];
-
 $(document).ready(function(){
     SessionCheck();
     SearchSetting();
@@ -9,6 +7,7 @@ $(document).ready(function(){
     var keyword = KeyWordCheck();
     SearchByKeyWord(keyword);
     getWebtoon(keyword);
+    addItemSetting();
     //mypageSetting();
 })
 
@@ -69,23 +68,28 @@ function SearchByKeyWord(keyword){
 async function getItembykeyword(keyword){
     var thisurl="/api/v2/webtoon-api/webtoon/single/"+keyword;
     const res=await fetch(thisurl, {method: "get"}).then(response => response.json());
-    keyres = res.webtoonKeyword;
+    var keyres = res.webtoonKeyword;
     keyres = keyres.replace("[", "");
     keyres = keyres.replace("]", "");
     keyres = keyres.replace(/\'/g, "");
     keyres = keyres.replace(/\ /g, "");
     keyres = keyres.split(',');
-    console.log(keyres.length);
     for (var i = 0; i < keyres.length; i++){
-        var url="/api/v2/webtoon-api/webtoon/allkeyword?keyword=" + keyres[i] + "&limit=200";
-                await fetch(url,{method:"get"}).then(response => response.json()).then(
+        var url="/api/v2/webtoon-api/webtoon/allkeyword?keyword=" + keyres[i] + "&limit=20";
+                fetch(url,{method:"get"}).then(response => response.json()).then(
                     data => {
-                        $.each(data, function (idx) {
+                         for (var idx = 0; idx<7; idx++){ //$.each(data, function (idx)
+                            if(data[idx] == null){
+                                continue;
+                            }
+                            if(data[idx].webtoonId == keyword){
+                                continue;
+                            }
                             var innerhtml = '<li class="item" id='+data[idx].webtoonId +'><div id="item_img"><img src=' + data[idx].webtoonThumbnail + '></div>' +
                                             '<div id="item_text"><span><a id="merchansub"></a> <a id="item_name">'+ data[idx].webtoonName+'</a></span></br>'+
                                             '<span><a id="merchansub"></span></br></div></li>'
                                             $("#webtoonlist").append(innerhtml);
-                        })
+                        }//)
                     }
                 )
     }
@@ -100,7 +104,7 @@ function gotoItem(){
 
 async function SessionCheck(){
     var baseurl=window.location;
-    const res1=await fetch("./api/v2/member-api/session",{method:"GET"}).then(response => response.text());
+    const res1=await fetch("/api/v2/member-api/session",{method:"GET"}).then(response => response.text());
     if(res1.startsWith("{")){
         console.log("login plz");
     }
@@ -136,6 +140,17 @@ function mypageSetting(){
     })
 }
 
-function addItem(keyword){
-
+function addItemSetting(){
+    $("addbtn").click(function(){
+        addItemtoMypage();
+    })
 }
+
+async function addItemtoMypage(){
+    var baseurl=window.location;
+    var locate=baseurl .protocol +"//"+baseurl .host+"/webtoon/"
+    var str=baseurl.toString();
+    var Keyword=str.substr(locate.length,str.length);
+    //console.log(Keyword);
+}
+

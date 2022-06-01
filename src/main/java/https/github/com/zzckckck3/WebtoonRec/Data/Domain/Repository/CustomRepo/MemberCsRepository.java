@@ -26,4 +26,22 @@ public class MemberCsRepository {
         return em.createQuery("select m from MemberEntity m where m.email = :email", MemberEntity.class)
                 .setParameter("email", email).getSingleResult();
     }
+
+
+
+
+    /*
+    @Modifying
+    @Transactional
+    public MemberEntity plus(String webtoonId, String email){
+        return em.createQuery("update MemberEntity m set m.favWebtoon=:webtoonId where m.email=:email", MemberEntity.class)
+                .setParameter("webtoonId", webtoonId).setParameter("email", email).getSingleResult();
+    }
+     */
+    /*
+    public List<MemberEntity> addfavWebtoon(String webtoonId, String email){
+        return em.createQuery("update MemberEntity m set m.favWebtoon = :webtoonId where m.email=:email", MemberEntity.class)
+                .setParameter("webtoonId", webtoonId).setParameter("email", email).getResultList();
+    }
+    */
 }

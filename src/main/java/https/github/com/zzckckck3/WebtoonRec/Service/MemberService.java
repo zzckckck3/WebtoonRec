@@ -4,6 +4,7 @@ package https.github.com.zzckckck3.WebtoonRec.Service;
 import https.github.com.zzckckck3.WebtoonRec.Data.Domain.Entity.MemberEntity;
 import https.github.com.zzckckck3.WebtoonRec.Data.Domain.Repository.CustomRepo.MemberCsRepository;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -12,13 +13,17 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import javax.persistence.EntityManager;
+
 import java.util.List;
 
+@Slf4j
 @Service
 @RequiredArgsConstructor
 public class MemberService implements UserDetailsService {
     private final MemberCsRepository memberCsRepository;
     private final PasswordEncoder passwordEncoder;
+    private final EntityManager em;
 
     //sign-up
     @Transactional
@@ -53,5 +58,11 @@ public class MemberService implements UserDetailsService {
     public MemberEntity findByEmail(String email){
         return memberCsRepository.findByEmail(email);
     }
+
+    /*
+    public MemberEntity plus(String webtoonId, String email){
+        return memberCsRepository.plus(webtoonId, email);
+    }
+     */
 
 }

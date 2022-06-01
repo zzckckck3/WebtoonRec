@@ -34,4 +34,7 @@ public class WebtoonCsRepository {
         return em.find(WebtoonEntity.class, id);
     }
 
+    public List<WebtoonEntity> findByPlatform(String platform, int offset, int limit){
+        return em.createQuery("select w from WebtoonEntity w where w.platform=:platform").setParameter("platform", platform).setFirstResult(offset).setMaxResults(limit).getResultList();
+    }
 }

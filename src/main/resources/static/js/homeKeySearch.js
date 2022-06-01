@@ -42,7 +42,7 @@ async function getItembykeyword(keyword){
 function gotoItem(){
     $('#webtoonlist').on("click","li",function (){
         var id=$(this).attr('webtoonId');
-        location.assign("./webtoon/"+webtoonId);
+        location.assign("/webtoon/"+webtoonId);
     })
 }
 
@@ -135,7 +135,7 @@ function KeySearchSetting(){
 
 async function SessionCheck(){
     var baseurl=window.location;
-    const res1=await fetch("./api/v2/member-api/session",{method:"GET"}).then(response => response.text());
+    const res1=await fetch("/api/v2/member-api/session",{method:"GET"}).then(response => response.text());
     if(res1.startsWith("{")){
         console.log("login plz");
     }

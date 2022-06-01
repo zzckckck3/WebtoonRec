@@ -42,6 +42,15 @@ public class WebtoonCsApiController {
         return dtoList;
     }
 
+    @GetMapping("/webtoon/allplatform")
+    public List<WebtoonDto> findAllbyPlatform(@RequestParam String platform, @RequestParam int limit, @RequestParam int offset){
+        List<WebtoonEntity> datas = webtoonService2.findbyPlatform( platform, offset, limit);
+        //List<WebtoonEntity> ClusteredDatas = datas.stream().filter( webtoonEntity -> webtoonEntity.getPlatform().contains( platform ) ).collect(Collectors.toList());
+        //List<WebtoonDto> dtoList = ClusteredDatas.stream().map( WebtoonDto::new ).collect(Collectors.toList());
+        List<WebtoonDto> dtoList = datas.stream().map(WebtoonDto::new).collect(Collectors.toList());
+        return dtoList;
+    }
+
     @GetMapping("/webtoon/single/{webtoonId}")
     public WebtoonEntity getItembyId(@PathVariable String webtoonId){
         WebtoonEntity webtoonEntity = webtoonService2.findOne(webtoonId);

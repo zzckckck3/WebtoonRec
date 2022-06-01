@@ -8,6 +8,7 @@ import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
@@ -38,9 +39,9 @@ public class MemberController {
         System.out.println(memberService);
         System.out.println("===========");
         memberService.save(memberEntity);
-
         return "/fragments/public/memJoinSuccess";
     }
+
 
     // 로그인 페이지
     @GetMapping("/user/login")
@@ -50,36 +51,17 @@ public class MemberController {
         return "/fragments/public/memLogin";
     }
 
-
-
     // 로그아웃 결과 페이지
     @GetMapping("/user/logout/result")
     public String dispLogout() {
         return "/logout";
     }
 
-    // 접근 거부 페이지
-    /*
-    @GetMapping("/user/denied")
-    public String dispDenied() {
-        return "/denied";
-    }
-    */
+    @PutMapping("/puttest")
+    public void putTest(){
+        System.out.println("test");
 
-    // 내 정보 페이지
-    /*
-    @GetMapping("/user/info")
-    public String dispMyInfo() {
-        return "/myinfo";
     }
-     */
 
-    // 어드민 페이지
-    /*
-    @GetMapping("/admin")
-    public String dispAdmin() {
-        return "/admin";
-    }
-     */
 }
 

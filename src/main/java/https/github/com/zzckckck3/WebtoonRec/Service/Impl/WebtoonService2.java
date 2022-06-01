@@ -34,4 +34,7 @@ public class WebtoonService2 {
         return csRepository.findAlll();
     }
 
+    public List<WebtoonEntity> findbyPlatform(String platform, int offset, int limit){
+        return csRepository.findByPlatform(platform, offset, limit);
+    }
 }
