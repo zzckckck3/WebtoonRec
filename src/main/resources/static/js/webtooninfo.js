@@ -1,7 +1,7 @@
 var thisKeyword = [];
 
 $(document).ready(function(){
-    //SessionCheck();
+    SessionCheck();
     SearchSetting();
     gotoItem();
     KeySearchSetting();
@@ -99,28 +99,17 @@ function gotoItem(){
 }
 
 async function SessionCheck(){
-    //shoplist 세팅 포함
     var baseurl=window.location;
-
-    const res1=await fetch("/api/v1/members/session",{method:"GET"}).then(response => response.json());
-    if(!res1.isauth){
-        return false;
+    const res1=await fetch("./api/v2/member-api/session",{method:"GET"}).then(response => response.text());
+    if(res1.startsWith("{")){
+        console.log("login plz");
     }
-    if(res1.iswhom !="[ROLE_ADMIN]"){
-        $("#manager").remove();
-    }
-    if(res1.iswhom !="[ROLE_ANONYMOUS]"){
-        $("#login-navi").text(res1.iswho + "님 안녕하세요");
+    else {
+        console.log(res1);
+        $("#login-navi-btn").text(res1 + "님 안녕하세요");
         $("#login-navi").attr("href","#")
-        $("#join-navi").text("로그아웃");
-        $("#join-navi").attr("href","/logout");
-        $("#scart").click(function (){
-            window.location.assign(baseurl .protocol +"//"+baseurl .host+"/shopping-list");
-        })
-    }else{
-        $("#scart").click(function (){
-            alert("로그인이 필요한 서비스 입니다.")
-        })
+        $("#join-navi-btn").text("로그아웃");
+        $("#join-navi").attr("href","/user/logout");
     }
 }
 
@@ -147,3 +136,6 @@ function mypageSetting(){
     })
 }
 
+function addItem(keyword){
+
+}

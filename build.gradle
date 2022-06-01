@@ -59,6 +59,10 @@ dependencies {
 	implementation group: 'org.springframework.security', name: 'spring-security-oauth2-client', version: '5.6.2'
 	implementation 'com.google.api-client:google-api-client:1.33.0'
 	implementation 'com.google.oauth-client:google-oauth-client-jetty:1.32.1'
+
+	implementation 'javax.xml.bind:jaxb-api'
+	implementation 'org.glassfish.jaxb:jaxb-runtime'
+	implementation 'javax.activation:activation:1.1.1'
 ''}
 
 tasks.named('test') {

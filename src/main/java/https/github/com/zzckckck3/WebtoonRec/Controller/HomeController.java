@@ -21,4 +21,9 @@ public class HomeController {
     public String keysearch(@PathVariable @Nullable String keyword){
         return "fragments/public/homeKeySearch";
     }
+
+    @GetMapping("/mypage")
+    public String mypage(){
+        return "/fragments/public/myPage";
+    }
 }

@@ -1,0 +1,48 @@
+body{
+    text-align:center;
+}
+
+#wrap{
+    overflow: revert;
+    position:absolute;
+    left:20%;
+    margin-left:0%;
+    height:100%;
+}
+
+#success{
+    font-size: 40px;
+    margin-top: 100px;
+}
+
+#btn-home{
+    font-size: 30px;
+    margin-top: 40px;
+    width: 300px;
+    height: 100px;
+    background-color: black;
+    color: white;
+    border-radius: 20px;
+}
+#btn-home:hover{
+    background-color: white;
+    color: black;
+    border: 2px solid;
+    cursor: pointer;
+}
+
+#btn-login{
+    font-size: 30px;
+    margin-top:40px;
+    width: 300px;
+    height: 100px;
+    background-color: black;
+    color: white;
+    border-radius: 20px;
+}
+#btn-login:hover{
+    background-color: white;
+    color: black;
+    border: 2px solid;
+    cursor: pointer;
+}

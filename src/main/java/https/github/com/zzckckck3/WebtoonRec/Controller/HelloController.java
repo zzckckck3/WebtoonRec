@@ -3,16 +3,9 @@ package https.github.com.zzckckck3.WebtoonRec.Controller;
 import lombok.extern.slf4j.Slf4j;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.http.HttpHeaders;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-
-import java.util.HashMap;
-import java.util.Map;
 
 @RestController
 @Slf4j
@@ -39,8 +32,8 @@ public class HelloController {
         throw new Exception();
 
     }
-
-    @ExceptionHandler(value = Exception.class)
+    /*
+    * @ExceptionHandler(value = Exception.class)
     public ResponseEntity<Map<String, String>> ExceptionHandler(Exception e){
         HttpHeaders responseHeaders = new HttpHeaders();
         //responseHeaders.add(HttpHeaders.CONTENT_TYPE, "application/json");
@@ -55,5 +48,6 @@ public class HelloController {
         map.put("message", "에러 발생");
 
         return new ResponseEntity<>(map, responseHeaders, httpStatus);
-    }
+    }*/
+
 }

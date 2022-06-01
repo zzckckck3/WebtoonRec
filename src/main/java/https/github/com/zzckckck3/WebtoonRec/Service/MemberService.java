@@ -3,7 +3,7 @@ package https.github.com.zzckckck3.WebtoonRec.Service;
 
 import https.github.com.zzckckck3.WebtoonRec.Data.Domain.Entity.MemberEntity;
 import https.github.com.zzckckck3.WebtoonRec.Data.Domain.Repository.CustomRepo.MemberCsRepository;
-import org.springframework.context.annotation.Lazy;
+import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -15,17 +15,12 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.List;
 
 @Service
-//@RequiredArgsConstructor
-@Transactional(readOnly = true)
+@RequiredArgsConstructor
 public class MemberService implements UserDetailsService {
     private final MemberCsRepository memberCsRepository;
     private final PasswordEncoder passwordEncoder;
 
-    MemberService (@Lazy MemberCsRepository memberCsRepository, @Lazy PasswordEncoder passwordEncoder){
-        this.memberCsRepository = memberCsRepository;
-        this.passwordEncoder = passwordEncoder;
-    }
-
+    //sign-up
     @Transactional
     public Long save(MemberEntity memberEntity){
         memberEntity.Encodedpassword(passwordEncoder);
@@ -44,7 +39,11 @@ public class MemberService implements UserDetailsService {
         if(memberEntity==null){
             throw new UsernameNotFoundException(email);
         }
-        return User.builder().username(memberEntity.getEmail()).password(memberEntity.getPassword()).roles(memberEntity.getRoleType().toString()).build();
+        return User.builder()
+                .username(memberEntity.getEmail())
+                .password(memberEntity.getPassword())
+                .roles(memberEntity.getRoleType().toString())
+                .build();
     }
 
     public PasswordEncoder getPasswordEncoder(){
@@ -54,19 +53,5 @@ public class MemberService implements UserDetailsService {
     public MemberEntity findByEmail(String email){
         return memberCsRepository.findByEmail(email);
     }
-    /*@Override
-    public UserDetails loadUserByUsername(String userEmail) throws UsernameNotFoundException{
-        Optional<MemberEntity> userEntityWrapper = memberRepository.findByEmail(userEmail);
-        MemberEntity memberEntity = userEntityWrapper.get();
 
-        List<GrantedAuthority> authorities = new ArrayList<>();
-
-        if(("zzckxkck1@gmail.com").equals(userEmail)){
-            authorities.add(new SimpleGrantedAuthority(RoleType.ADMIN.getValue()));
-        } else {
-            authorities.add(new SimpleGrantedAuthority(RoleType.MEMBER.getValue()));
-        }
-
-        return new User(memberEntity.getEmail(), memberEntity.getPassword(), authorities);
-    }*/
 }
