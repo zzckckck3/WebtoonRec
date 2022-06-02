@@ -8,7 +8,7 @@ $(document).ready(function(){
     SearchByKeyWord(keyword);
     getWebtoon(keyword);
     addItemSetting();
-    //mypageSetting();
+    mypageSetting();
 })
 
 function logoSetting(){
@@ -53,6 +53,7 @@ async function getWebtoon(keyword){
     var url="/api/v2/webtoon-api/webtoon/single/"+keyword;
     const res=await fetch(url, {method: "get"}).then(response => response.json());
     var resimage = res.webtoonThumbnail;
+    $("#webtoon-url").attr("href",res.webtoonURL);
     $("#webtoon-image").attr("src",resimage);
     $("#webtoon-name").text(res.webtoonName);
     $("#webtoon-platform").text(res.platform);
@@ -141,16 +142,32 @@ function mypageSetting(){
 }
 
 function addItemSetting(){
-    $("addbtn").click(function(){
-        addItemtoMypage();
-    })
+    addItemSetting();
 }
 
-async function addItemtoMypage(){
+async function addItemSetting(){
+    const email = await fetch("/api/v2/member-api/session", {method:"GET"}).then(response => response.text());
     var baseurl=window.location;
     var locate=baseurl .protocol +"//"+baseurl .host+"/webtoon/"
     var str=baseurl.toString();
     var Keyword=str.substr(locate.length,str.length);
-    //console.log(Keyword);
-}
+    var dupcheck=false;
+    const check = await fetch("/api/v2/favWebtoon-api/allbyEmail?email="+email,{method:"get"})
+        .then(response => response.json()).then((data) => {
+            $.each(data, function (idx){
+                if(data[idx].webtoonId == Keyword){
+                    dupcheck = true;
+                }
+            })
+        });
 
+    $("#addbtn").on("click", function(){
+        if(dupcheck == false){
+            const res1 = fetch("/api/v2/favWebtoon-api/addfav?memberEmail="+email+"&webtoonId="+Keyword, { method:"post" }).then(response => response.text());
+            alert("관심 웹툰에 추가되었습니다.");
+            location.reload(true);
+        } else{
+            alert("이미 등록한 웹툰입니다.");
+        }
+    })
+}

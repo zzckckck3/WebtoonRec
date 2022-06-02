@@ -5,9 +5,7 @@ import https.github.com.zzckckck3.WebtoonRec.Data.Domain.Repository.CustomRepo.M
 import https.github.com.zzckckck3.WebtoonRec.Service.MemberService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.annotation.Lazy;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.security.Principal;
 
@@ -47,10 +45,9 @@ public class MemberApiController {
         System.out.println(email);
     }
      */
-    /*
+
     @PutMapping("/puttest")
-    public List<MemberEntity> put(){
-        return memberService.addfavWebtoon("3", "zzckxkck1@gmail.com");
+    void put(@RequestParam String webtoonId, @RequestParam String email) throws Exception {
+        memberService.addfavWebtoon(webtoonId, email);
     }
-     */
 }

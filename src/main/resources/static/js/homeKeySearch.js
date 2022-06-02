@@ -41,7 +41,8 @@ async function getItembykeyword(keyword){
 
 function gotoItem(){
     $('#webtoonlist').on("click","li",function (){
-        var id=$(this).attr('webtoonId');
+        var webtoonId=$(this).attr('id');
+        console.log(webtoonId);
         location.assign("/webtoon/"+webtoonId);
     })
 }

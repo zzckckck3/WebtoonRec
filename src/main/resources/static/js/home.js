@@ -114,14 +114,14 @@ function categorySetting(){
 
         if($(this).attr("id")=="default_category"&&$("#webtoonlist")!=null){
             selectedPlatform = $(this).attr("id");
-            console.log(selectedPlatform);
+            itemOffset = 1;
+            itemLimit = 100;
             getItem();
         }
         else if($(this).attr("id")!="default_category"){
             itemOffset = 1;
             itemLimit = 100;
             selectedPlatform = $(this).attr("id");
-            console.log(selectedPlatform);
             getTypedItem($(this).attr("id")); //li 의 id값 반환
         }
 

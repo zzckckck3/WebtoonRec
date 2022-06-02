@@ -5,6 +5,8 @@ import https.github.com.zzckckck3.WebtoonRec.Data.Dto.MemberDto;
 import https.github.com.zzckckck3.WebtoonRec.Service.MemberService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.annotation.Lazy;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -58,9 +60,8 @@ public class MemberController {
     }
 
     @PutMapping("/puttest")
-    public void putTest(){
-        System.out.println("test");
-
+    public void putTest(@AuthenticationPrincipal UserDetails userDetails){
+        System.out.println(userDetails.getUsername());
     }
 
 }

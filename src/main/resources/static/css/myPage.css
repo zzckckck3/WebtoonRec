@@ -177,6 +177,8 @@ hr{
     border-color: #212425;
     background-color: #fff;
     z-index: 1;
+    overflow: scroll;
+    overflow-x: hidden;
 }
 
 #mypage-title{
@@ -227,7 +229,7 @@ hr{
     width: 120px;
 }
 
-#mypage-item-summary-outer{
+.mypage-item-summary-outer{
     font-size: 9px;
     margin-top: 20px;
     height: 180px;
@@ -238,7 +240,7 @@ hr{
     word-break:break-word;
 }
 
-#btn-delete{
+.btn-delete{
     font-size: 15px;
     margin-top: 42px;
     width: 60px;
@@ -248,8 +250,9 @@ hr{
     background-color: white;
 }
 
-#btn-delete:hover{
+.btn-delete:hover{
     background-color:black;
     border: 2px solid;
     color:white;
+    cursor: pointer;
 }

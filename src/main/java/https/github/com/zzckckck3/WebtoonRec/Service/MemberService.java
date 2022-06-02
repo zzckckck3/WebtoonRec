@@ -3,6 +3,7 @@ package https.github.com.zzckckck3.WebtoonRec.Service;
 
 import https.github.com.zzckckck3.WebtoonRec.Data.Domain.Entity.MemberEntity;
 import https.github.com.zzckckck3.WebtoonRec.Data.Domain.Repository.CustomRepo.MemberCsRepository;
+import https.github.com.zzckckck3.WebtoonRec.Data.Domain.Repository.MemberRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.core.userdetails.User;
@@ -22,6 +23,7 @@ import java.util.List;
 @RequiredArgsConstructor
 public class MemberService implements UserDetailsService {
     private final MemberCsRepository memberCsRepository;
+    private final MemberRepository memberRepository;
     private final PasswordEncoder passwordEncoder;
     private final EntityManager em;
 
@@ -59,10 +61,8 @@ public class MemberService implements UserDetailsService {
         return memberCsRepository.findByEmail(email);
     }
 
-    /*
-    public MemberEntity plus(String webtoonId, String email){
-        return memberCsRepository.plus(webtoonId, email);
-    }
-     */
 
+    public void addfavWebtoon(String webtoonId, String email) throws Exception {
+        memberRepository.plus(webtoonId, email);
+    }
 }

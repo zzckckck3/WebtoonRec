@@ -43,7 +43,7 @@ async function getItembytitleword(titleword){
 
 function gotoItem(){
     $('#webtoonlist').on("click","li",function (){
-        var id=$(this).attr('webtoonId');
+        var webtoonId=$(this).attr('id');
         location.assign("/webtoon/"+webtoonId);
     })
 }
