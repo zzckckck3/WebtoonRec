@@ -1,7 +1,5 @@
-var thisKeyword = [];
-
 $(document).ready(function(){
-    //SessionCheck();
+    SessionCheck();
     SearchSetting();
     gotoItem();
     KeySearchSetting();
@@ -9,7 +7,8 @@ $(document).ready(function(){
     var keyword = KeyWordCheck();
     SearchByKeyWord(keyword);
     getWebtoon(keyword);
-    //mypageSetting();
+    addItemSetting();
+    mypageSetting();
 })
 
 function logoSetting(){
@@ -54,6 +53,7 @@ async function getWebtoon(keyword){
     var url="/api/v2/webtoon-api/webtoon/single/"+keyword;
     const res=await fetch(url, {method: "get"}).then(response => response.json());
     var resimage = res.webtoonThumbnail;
+    $("#webtoon-url").attr("href",res.webtoonURL);
     $("#webtoon-image").attr("src",resimage);
     $("#webtoon-name").text(res.webtoonName);
     $("#webtoon-platform").text(res.platform);
@@ -69,23 +69,28 @@ function SearchByKeyWord(keyword){
 async function getItembykeyword(keyword){
     var thisurl="/api/v2/webtoon-api/webtoon/single/"+keyword;
     const res=await fetch(thisurl, {method: "get"}).then(response => response.json());
-    keyres = res.webtoonKeyword;
+    var keyres = res.webtoonKeyword;
     keyres = keyres.replace("[", "");
     keyres = keyres.replace("]", "");
     keyres = keyres.replace(/\'/g, "");
     keyres = keyres.replace(/\ /g, "");
     keyres = keyres.split(',');
-    console.log(keyres.length);
     for (var i = 0; i < keyres.length; i++){
-        var url="/api/v2/webtoon-api/webtoon/allkeyword?keyword=" + keyres[i] + "&limit=200";
-                await fetch(url,{method:"get"}).then(response => response.json()).then(
+        var url="/api/v2/webtoon-api/webtoon/allkeyword?keyword=" + keyres[i] + "&limit=20";
+                fetch(url,{method:"get"}).then(response => response.json()).then(
                     data => {
-                        $.each(data, function (idx) {
+                         for (var idx = 0; idx<7; idx++){ //$.each(data, function (idx)
+                            if(data[idx] == null){
+                                continue;
+                            }
+                            if(data[idx].webtoonId == keyword){
+                                continue;
+                            }
                             var innerhtml = '<li class="item" id='+data[idx].webtoonId +'><div id="item_img"><img src=' + data[idx].webtoonThumbnail + '></div>' +
                                             '<div id="item_text"><span><a id="merchansub"></a> <a id="item_name">'+ data[idx].webtoonName+'</a></span></br>'+
                                             '<span><a id="merchansub"></span></br></div></li>'
                                             $("#webtoonlist").append(innerhtml);
-                        })
+                        }//)
                     }
                 )
     }
@@ -99,28 +104,17 @@ function gotoItem(){
 }
 
 async function SessionCheck(){
-    //shoplist 세팅 포함
     var baseurl=window.location;
-
-    const res1=await fetch("/api/v1/members/session",{method:"GET"}).then(response => response.json());
-    if(!res1.isauth){
-        return false;
+    const res1=await fetch("/api/v2/member-api/session",{method:"GET"}).then(response => response.text());
+    if(res1.startsWith("{")){
+        console.log("login plz");
     }
-    if(res1.iswhom !="[ROLE_ADMIN]"){
-        $("#manager").remove();
-    }
-    if(res1.iswhom !="[ROLE_ANONYMOUS]"){
-        $("#login-navi").text(res1.iswho + "님 안녕하세요");
+    else {
+        console.log(res1);
+        $("#login-navi-btn").text(res1 + "님 안녕하세요");
         $("#login-navi").attr("href","#")
-        $("#join-navi").text("로그아웃");
-        $("#join-navi").attr("href","/logout");
-        $("#scart").click(function (){
-            window.location.assign(baseurl .protocol +"//"+baseurl .host+"/shopping-list");
-        })
-    }else{
-        $("#scart").click(function (){
-            alert("로그인이 필요한 서비스 입니다.")
-        })
+        $("#join-navi-btn").text("로그아웃");
+        $("#join-navi").attr("href","/user/logout");
     }
 }
 
@@ -147,3 +141,33 @@ function mypageSetting(){
     })
 }
 
+function addItemSetting(){
+    addItemSetting();
+}
+
+async function addItemSetting(){
+    const email = await fetch("/api/v2/member-api/session", {method:"GET"}).then(response => response.text());
+    var baseurl=window.location;
+    var locate=baseurl .protocol +"//"+baseurl .host+"/webtoon/"
+    var str=baseurl.toString();
+    var Keyword=str.substr(locate.length,str.length);
+    var dupcheck=false;
+    const check = await fetch("/api/v2/favWebtoon-api/allbyEmail?email="+email,{method:"get"})
+        .then(response => response.json()).then((data) => {
+            $.each(data, function (idx){
+                if(data[idx].webtoonId == Keyword){
+                    dupcheck = true;
+                }
+            })
+        });
+
+    $("#addbtn").on("click", function(){
+        if(dupcheck == false){
+            const res1 = fetch("/api/v2/favWebtoon-api/addfav?memberEmail="+email+"&webtoonId="+Keyword, { method:"post" }).then(response => response.text());
+            alert("관심 웹툰에 추가되었습니다.");
+            location.reload(true);
+        } else{
+            alert("이미 등록한 웹툰입니다.");
+        }
+    })
+}

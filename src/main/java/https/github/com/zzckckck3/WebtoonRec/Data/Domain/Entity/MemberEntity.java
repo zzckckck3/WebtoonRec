@@ -1,6 +1,5 @@
 package https.github.com.zzckckck3.WebtoonRec.Data.Domain.Entity;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Getter;
 import lombok.Setter;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -22,21 +21,22 @@ public class MemberEntity {
     @Column(length = 100, nullable = false)
     private String password;
 
-    @Column
+    @Column(nullable = true)
     private String favWebtoon;
 
-    @JsonIgnore
-    @Enumerated(EnumType.STRING)
-    private RoleType roleType;
+    @Enumerated(EnumType.STRING)@Setter
+    private RoleType roleType = RoleType.MEMBER;
 
     public static MemberEntity createMember(String email, String password, String favWebtoon){
         MemberEntity newMember = new MemberEntity();
         newMember.setEmail(email);
         newMember.setPassword(password);
         newMember.setFavWebtoon(favWebtoon);
+        newMember.setRoleType(RoleType.MEMBER);
 
         return newMember;
     }
+
     public void Encodedpassword(PasswordEncoder encoder) {
         this.password= encoder.encode(this.password);
     }

@@ -3,7 +3,6 @@ package https.github.com.zzckckck3.WebtoonRec.config;
 import https.github.com.zzckckck3.WebtoonRec.Service.MemberService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.access.expression.SecurityExpressionOperations;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
@@ -13,8 +12,6 @@ import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.core.Authentication;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.FilterInvocation;
 import org.springframework.security.web.access.expression.DefaultWebSecurityExpressionHandler;
 import org.springframework.security.web.access.expression.WebSecurityExpressionRoot;
@@ -31,10 +28,8 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     private final AuthenticationFailureHandler failureHandler;
     private final AuthenticationSuccessHandler successHandler;
 
-    @Bean
-    public PasswordEncoder passwordEncoder(){
-        return new BCryptPasswordEncoder();
-    }
+
+
 
     @Override
     public void configure(AuthenticationManagerBuilder auth) throws Exception{
@@ -52,7 +47,6 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                return root;
            }
         });
-
     }
 
     @Override
@@ -67,10 +61,11 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .antMatchers("/**").permitAll()
                 .and() // 로그인 설정
                 .formLogin()
-                .loginPage("/user/login").loginProcessingUrl("/user/login-proc").defaultSuccessUrl("/").successHandler(successHandler).failureHandler(failureHandler)
+                .loginPage("/user/login").loginProcessingUrl("/user/login-proc").defaultSuccessUrl("/")
                 .permitAll()
                 .and() // 로그아웃 설정
-                .logout().logoutUrl("logout").invalidateHttpSession(true).clearAuthentication(true).deleteCookies("").logoutSuccessUrl("/")
+                .logout().logoutUrl("/user/logout").invalidateHttpSession(true).clearAuthentication(true).logoutSuccessUrl("/")
+                //.deleteCookies("")
                 .and()
                 // 403 예외처리 핸들링
                 .exceptionHandling().accessDeniedPage("/user/denied");

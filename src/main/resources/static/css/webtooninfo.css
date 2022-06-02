@@ -260,7 +260,7 @@ hr{
     background-color: black;
     border: 2px solid black;
     color: white;
-    pointer:cursor;
+    cursor: pointer;
 }
 
 #webtoonlist{

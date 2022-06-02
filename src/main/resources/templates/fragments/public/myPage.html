@@ -5,16 +5,17 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=0.5, user-scalable=yes, maximum-scale=1.0">
     <title>Webtoon Recommend</title>
-    <link type="text/css" rel="stylesheet" href="/css/home.css">
+    <link type="text/css" rel="stylesheet" href="/css/myPage.css">
     <link href="https://fonts.googleapis.com/css2?family=Do+Hyeon&family=Jua&display=swap" rel="stylesheet">
     <script src="https://kit.fontawesome.com/97e36fce94.js" crossorigin="anonymous"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
-    <script type="text/javascript" src="/js/homeSearch.js"></script>
+    <script type="text/javascript" src="/js/mypage.js"></script>
 </head>
 <body>
 
 <div id="wrap">
+
     <div id="bodyheader">
         <div id="mainHeaderbar">
             <div id="logo" style="font-size: 40px; margin-top:10px;"><b>ATAD:WR</b></div>
@@ -36,7 +37,7 @@
             <nav id="navi-bar">
                 <a id="login-navi" href="/user/login"><button id="login-navi-btn">로그인</button></a>
                 <a id="join-navi" href="/user/signup"><button id="join-navi-btn">회원가입</button></a>
-                <a id="mypage"><button>마이페이지</button></a> <!--미구현-->
+                <a id="mypage"><button>마이페이지</button></a>
                 <!--<a href="/contact">FAQ</a> 미구현-->
             </nav>
         </div>
@@ -48,51 +49,29 @@
         </div>
     </div>
     <hr>
-    <!--
-    <select id="dataPerPage">
-        <option value="10">10개씩보기</option>
-        <option value="15">15개씩보기</option>
-        <option value="20">20개씩보기</option>
-    </select>
-    -->
-    <div id="category_part">
-
-        <ul id="category_list">
-            <li id="default_category">전체 보기</li>
-            <li id="naverWebtoon" style="margin-top:3px;">네이버웹툰</li>
-            <li id="kakaoWebtoon" style="margin-top:3px;">카카오웹툰</li>
-            <li id="kakaoPage" style="margin-top:3px;">카카오페이지</li>
-            <li id="lezhinComics" style="margin-top:3px;">레진코믹스</li>
-
-
-        </ul>
+    <div class="mypage_container" id="mypage_container">
+        <div id="mypage-title"><b>관심웹툰</b></div>
+        <!--
+        <div class="mypage-inner-container">
+            <img src="" id="mypage-item-img">
+            <div class="vertical-hr"></div>
+            <div class="mypage-item-sources">
+                <div id="mypage-item-name">웹툰 제목</div>
+                <br>
+                <div id="mypage-item-author">웹툰 작가</div>
+                <br>
+                <div id="mypage-item-platform">웹툰 플랫폼</div>
+            </div>
+            <div class="vertical-hr"></div>
+            <div class="mypage-item-summary-outer">
+                <div id="mypage-item-summary">웹툰 줄거리</div>
+            </div>
+            <div class="vertical-hr"></div>
+            <button class="btn-delete">삭제</button>
+        </div>
+        -->
 
     </div>
-
-    <div style="margin-top:40px;"></div>
-    <!--
-    <btn id="list-left" style="font-size: 5rem" onclick="previousPage()">
-        <i class="fa-solid fa-angle-left"></i>
-    </btn>
-    <btn id="list-right" style="font-size: 5rem" onclick="nextPage()">
-        <i class="fa-solid fa-angle-right"></i>
-    </btn>
-    -->
-    <ul id="webtoonlist">
-
-        <!--li class="item">
-            <div id="item_img">
-                <img src="img/aakvndksvnsdlv.jpg">
-            </div>
-            <div id="item_text">
-                <a id="item_name">d</a></br>
-                <button>바로가기</button>
-            </div>
-        </li-->
-    </ul>
-    <ul id="pagingul">
-    </ul>
-
 </div>
 </body>
 </html>
