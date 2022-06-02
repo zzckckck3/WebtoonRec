@@ -9,6 +9,7 @@ body{
 
     height:1200px;
     overflow: scroll;
+    overflow-x: hidden;
 }
 #wrap{
     overflow: revert;
@@ -161,11 +162,72 @@ body{
 hr{
     width:940px;
     position:absolute;
-
+    background-color: black;
     border: 1px solid black;
 }
 
 /* 여기까지 */
+
+#loginplease{
+    margin-top: 30px;
+    font-size: 30px;
+}
+
+.recommend{
+    height: 230px;
+    margin-top:20px;
+}
+#recommendlist{
+    margin-top:0px;
+    padding:0px;
+    display:flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-content: flex-start;
+}
+#recommendlist li{
+    cursor:pointer;
+    margin-top:0;
+    width:160px;
+    height:180px;
+    margin-left:12.5px;
+    margin-right:12.5px;
+    margin-bottom: 10px;
+}
+
+#recommendlist li.item_margin{
+    margin-top:0;
+    width:160px;
+    height:100px;
+    margin-left:12.5px;
+    margin-right:12.5px;
+    margin-bottom: 10px;
+    border-bottom-left: soild 1px red;
+}
+#recommendlist li #recommenditem_img{
+    position: relative;
+    width:150px;
+    height:150px;
+    top:15px;
+}
+
+#recommendlist li #recommenditem_img img{
+    top:25px;
+    width:150px;
+    height:150px;
+    border-radius: 50px;
+}
+#recommendlist #recommenditem_text{
+    position: relative;
+    margin-top : 20px;
+    width:150px;
+    height:90px;
+    text-align: left;
+}
+#recommendlist #item_name{
+    font-weight: bold;
+    font-size: 14px;
+}
 
 #category_part{
     position: relative;
@@ -208,7 +270,7 @@ hr{
 }
 #webtoonlist{
     position:absolute;
-    top:300px;
+    top:550px;
     width:1000px;
     height:800px;
     list-style: none;
@@ -241,24 +303,12 @@ hr{
     margin-bottom: 10px;
     border-bottom-left: soild 1px red;
 }
-#webtoonlist li.item_margin{
-    margin-top:0;
-    width:160px;
-    height:100px;
-    margin-left:12.5px;
-    margin-right:12.5px;
-    margin-bottom: 10px;
-    border-bottom-left: soild 1px red;
-}
+
 li #item_img{
     position: relative;
     width:150px;
     height:150px;
     top:15px;
-}
-li #merchansub{
-    font-size: 10px;
-    width: 160px;
 }
 
 li #item_img img{
@@ -279,10 +329,7 @@ li #item_img img{
     font-weight: bold;
     font-size: 14px;
 }
-#item_price {
-    color:red;
-    font-weight: bold;
-}
+
 
 #list-left{
     text-align: center;

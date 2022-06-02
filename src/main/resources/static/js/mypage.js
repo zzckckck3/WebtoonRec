@@ -18,7 +18,7 @@ async function getmypageWebtoon(){
         })
     for (var i = 0; i<webtoonIdArray.length; i++){
         const myWebtoon = await fetch("/api/v2/webtoon-api/webtoon/single/"+String(webtoonIdArray[i]), {method: "GET"}).then(response => response.json()).then((data)=>{
-            var innerhtml = '<div class="mypage-inner-container">' +
+            var innerhtml = '<div class="mypage-inner-container" id="mypage-inner-container">' +
                                 '<img src='+data.webtoonThumbnail+' id="mypage-item-img">'+
                                 '<div class="vertical-hr"></div>' +
                                 '<div class="mypage-item-sources">' +
@@ -33,7 +33,7 @@ async function getmypageWebtoon(){
                                 '<div id="mypage-item-summary">' + data.webtoonSummary + '</div>' +
                                 '</div>' +
                                 '<div class="vertical-hr"></div>' +
-                                '<button class="btn-delete" id=' + data.webtoonId + '>삭제</button>' +
+                                '<button onclick="delItem(this)" class="btn-delete" id=' + data.webtoonId + '>삭제</button>' +
                                 '</div>'
                             $("#mypage_container").append(innerhtml);
         })
@@ -44,9 +44,17 @@ function delItemSetting(){
     delItem();
 }
 
-async function delItem(){
+async function delItem(e){
     const email = await fetch("/api/v2/member-api/session", {method:"GET"}).then(response => response.text());
-    const check = await fetch("/api/v2/favWebtoon-api/allbyEmail?email="+email,{method:"get"})
+    var delId = $(e).attr("id");
+    if(confirm("삭제 하시겠습니까?") == true){
+        fetch("/api/v2/favWebtoon-api/delfav?memberEmail=" + email + "&webtoonId=" + delId, {method:"delete"});
+        location.reload(true);
+    } else {
+        console.log("cancel");
+    }
+
+
 }
 
 function logoSetting(){
@@ -86,7 +94,6 @@ async function SessionCheck(){
         console.log("login plz");
     }
     else {
-        console.log(res1);
         $("#login-navi-btn").text(res1 + "님 안녕하세요");
         $("#login-navi").attr("href","#")
         $("#join-navi-btn").text("로그아웃");

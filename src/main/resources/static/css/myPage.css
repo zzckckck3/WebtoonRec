@@ -9,6 +9,7 @@ body{
 
     height:1200px;
     overflow: scroll;
+    overflow-x: hidden;
 }
 #wrap{
     overflow: revert;

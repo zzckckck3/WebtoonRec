@@ -2,8 +2,10 @@ var itemOffset = 1;
 var itemLimit = 100;
 var selectedPlatform = "";
 $(document).ready(function(){
+    getRecommendItem();
     getItem();
     gotoItem();
+    gotoItem2();
     categorySetting();
     SessionCheck();
     SearchSetting();
@@ -32,22 +34,6 @@ function previousPage(){
     else if(selectedPlatform == "lezhinComics"){
         getTypedItem(selectedPlatform);
     }
-    /*
-    if(itemOffset > 100){
-            itemOffset = itemOffset - 100;
-            Cleaning($("#webtoonlist"));
-            fetch("./api/v2/webtoon-api/webtoon/all?offset="+itemOffset+"&limit="+itemLimit,{method:"GET"}).then((response) => response.json()).then((data) => {
-                $.each(data, function (idx) {
-                    var innerhtml = '<li class="item" id='+data[idx].webtoonId +'><div id="item_img"><img src=' + data[idx].webtoonThumbnail + '></div>' +
-                                    '<div id="item_text"><span><a id="merchansub"></a> <a id="item_name">'+ data[idx].webtoonName+'</a></span></br>'+
-                                    '<span><a id="merchansub"></span></br></div></li>'
-                                    $("#webtoonlist").append(innerhtml);
-                    })
-                    var divmargin = '<li class="item_margin"><div"> </div></li>';
-                    $("#webtoonlist").append(divmargin);
-                })
-        }
-    */
 
 }
 
@@ -70,22 +56,79 @@ function nextPage(){
     else if(selectedPlatform == "lezhinComics"){
         getTypedItem(selectedPlatform);
     }
-    /*
-    if(itemOffset < 8500){
-            itemOffset = itemOffset + 100;
-            Cleaning($("#webtoonlist"));
-            fetch("./api/v2/webtoon-api/webtoon/all?offset="+itemOffset+"&limit="+itemLimit,{method:"GET"}).then((response) => response.json()).then((data) => {
-                $.each(data, function (idx) {
-                    var innerhtml = '<li class="item" id='+data[idx].webtoonId +'><div id="item_img"><img src=' + data[idx].webtoonThumbnail + '></div>' +
-                                    '<div id="item_text"><span><a id="merchansub"></a> <a id="item_name">'+ data[idx].webtoonName+'</a></span></br>'+
-                                    '<span><a id="merchansub"></span></br></div></li>'
-                                    $("#webtoonlist").append(innerhtml);
-                    })
-                    var divmargin = '<li class="item_margin"><div"> </div></li>';
-                    $("#webtoonlist").append(divmargin);
+}
+
+async function getRecommendItem(){
+    const webtoonIdArray = [];
+    const email = await fetch("/api/v2/member-api/session", {method:"GET"}).then(response => response.text());
+    if(email.startsWith("{")){
+        for (var i = 0; i<5; i++){
+            var randomselect = Math.floor(Math.random() * 8000)
+            await fetch("/api/v2/webtoon-api/webtoon/single/" + randomselect, {method:"GET"})
+                .then(response => response.json()).then((data) => {
+                    var innerhtml = '<li class="recommenditem" id='+data.webtoonId +'><div id="recommenditem_img"><img src=' + data.webtoonThumbnail + '></div>' +
+                                    '<div id="recommenditem_text"><a id="item_name">'+ data.webtoonName+'</a></span></br>'
+                                    $("#recommendlist").append(innerhtml);
                 })
         }
-    */
+        return;
+    }
+    const check = await fetch("/api/v2/favWebtoon-api/allbyEmail?email="+email,{method:"get"})
+        .then(response => response.json()).then((data) => {
+            if(data == null){return;}
+            $.each(data, function (idx){
+                webtoonIdArray.push(data[idx].webtoonId);
+            })
+        })
+    if(check == null){
+        for (var i = 0; i<5; i++){
+            var randomselect = Math.floor(Math.random() * 8000)
+            await fetch("/api/v2/webtoon-api/webtoon/single/" + randomselect, {method:"GET"})
+                .then(response => response.json()).then((data) => {
+                    var innerhtml = '<li class="recommenditem" id='+data.webtoonId +'><div id="recommenditem_img"><img src=' + data.webtoonThumbnail + '></div>' +
+                                    '<div id="recommenditem_text"><a id="item_name">'+ data.webtoonName+'</a></span></br>'
+                                    $("#recommendlist").append(innerhtml);
+                })
+        }
+        return;
+    }
+    const recWebtoonArr = [];
+    for (var i = 0; i<webtoonIdArray.length; i++){
+        await fetch("/api/v2/webtoon-api/webtoon/single/" + webtoonIdArray[i], {method:"GET"})
+            .then(response => response.json()).then((data) => {
+                    recWebtoonArr.push(data.webtoonKeyword);
+                })
+    }
+
+    for(var k = 0; k < recWebtoonArr.length; k++){
+        recWebtoonArr[k] = recWebtoonArr[k].replace("[", "");
+        recWebtoonArr[k] = recWebtoonArr[k].replace("]", "");
+        recWebtoonArr[k] = recWebtoonArr[k].replace(/\'/g, "");
+        recWebtoonArr[k] = recWebtoonArr[k].replace(/\ /g, "");
+        recWebtoonArr[k] = recWebtoonArr[k].split(',');
+    }
+    var recKeywordAll = recWebtoonArr.join();
+    recKeywordAll = recKeywordAll.split(',');
+    recKeywordSelect1 = recKeywordAll[Math.floor(Math.random() * recKeywordAll.length)];
+    recKeywordSelect2 = recKeywordAll[Math.floor(Math.random() * recKeywordAll.length)];
+
+    var url1="/api/v2/webtoon-api/webtoon/allkeyword?keyword=" + recKeywordSelect1 + "&limit=20";
+    var url2="/api/v2/webtoon-api/webtoon/allkeyword?keyword=" + recKeywordSelect2 + "&limit=20";
+    var url = "";
+    var randomselect = Math.floor(Math.random() * 2 + 1)
+    if(randomselect == 1){ url = url1; }
+    else if(randomselect == 2){ url = url2; }
+    fetch(url,{method:"get"}).then(response => response.json()).then(
+        data => {
+            $.each(data, function(idx){
+                if(idx > 4){
+                    return;
+                }
+                var innerhtml = '<li class="recommenditem" id='+data[idx].webtoonId +'><div id="recommenditem_img"><img src=' + data[idx].webtoonThumbnail + '></div>' +
+                                '<div id="recommenditem_text"><a id="item_name">'+ data[idx].webtoonName+'</a></span></br>'
+                                $("#recommendlist").append(innerhtml);
+            })
+        })
 }
 
 function getItem(){
@@ -104,6 +147,12 @@ function getItem(){
 
 function gotoItem(){
     $('#webtoonlist').on("click","li",function (){
+        var webtoonId = $(this).attr('id');
+        location.assign("/webtoon/"+webtoonId);
+    })
+}
+function gotoItem2(){
+    $('#recommendlist').on("click","li",function (){
         var webtoonId = $(this).attr('id');
         location.assign("/webtoon/"+webtoonId);
     })

@@ -30,8 +30,8 @@ body{
     display:flex;
     margin-top: 30px;
     margin-left:30px;
-}
 
+}
 #navi-bar{
     margin-top:20px;
     position:absolute;
@@ -92,6 +92,7 @@ body{
     position: relative;
     width:300px;
     height:52px;
+    display: inline-block;
 }
 #keyword-searchbar input{
     position: absolute;
@@ -147,12 +148,6 @@ body{
     cursor: pointer;
 }
 
-hr{
-    width:940px;
-    position:absolute;
-
-    border: 1px solid black;
-}
 #userinfo{
     display: inline-block;
     width: 590px;
@@ -163,113 +158,23 @@ hr{
     left: 350px;
     text-align: center;
 }
-/* 여기까지 기본 헤더 */
 
-.webtoon-outer-container{
+hr{
+    width:940px;
     position:absolute;
-    top: 285px;
-    width: 940px;
-    height: 600px;
-    font-family: 'Nanum Gothic', sans-serif;
-    /*border: 2px solid;*/
+
+    border: 1px solid black;
 }
 
-#webtoon-image-container{
-    position:absolute;
-    top: 45px;
-    width: 160px;
-    height: 240px;
-    list-style: none;
-    margin-left:20px;
-    padding:0px;
-    display:flex;
-    flex-direction: row;
-    flex-wrap: wrap;
-    align-content: flex-start;
-    text-align:center;
-    /*border: 2px solid;*/
-}
-
-#webtoon-image{
-    width: 160px;
-    height: 160px;
-    border-radius: 20px;
-}
-
-#webtoon-info-container{
-    left: 220px;
-    position:absolute;
-    top: 20px;
-    width: 600px;
-    height: 240px;
-    list-style: none;
-    margin:10px;
-    padding:0px;
-    display:flex;
-    flex-direction: row;
-    flex-wrap: wrap;
-    align-content: flex-start;
-    background-color: rgb(255, 255, 255);
-    box-shadow: 0px 0px 20px 0px black;
-    border-radius: 20px;
-}
-
-.webtoon-info-inner{
-    margin-left: 20px;
-    width: 600px;
-    margin-top: 7px;
-    margin-bottom: 7px;
-}
-
-#webtoon-summary-container{
-    position: absolute;
-    top: 300px;
-    width: 800px;
-    font-size: 0.9rem;
-}
-.webtoon-summary-inner{
-    margin-left: 20px;
-    width: 800px;
-    margin: 20px;
-}
-
-.custom-hr{
-    width: 560px;
-    margin-left: 20px;
-    height: 2px;
-    background-color: black;
-    margin-top: 5px;
-    margin-bottom: 5px;
-}
-
-#webtoon-name{
-    font-size: 30px;
-    display:block;
-}
-
-#addbtn{
-    background-color: white;
-    border: 2px solid black;
-    color: black;
-    border-radius: 5px;
-    margin-left:25px;
-    margin-top: 15px;
-    height: 40px;
-    width: 110px;
-}
-#addbtn:hover{
-    background-color: black;
-    border: 2px solid black;
-    color: white;
-    cursor: pointer;
-}
+/* 여기까지 */
 
 #webtoonlist{
     position:absolute;
-    top:20px;
-    width:900px;
+    top:300px;
+    width:1000px;
     height:800px;
     list-style: none;
+    margin-left:50px;
     margin-top:30px;
     margin-bottom:100px;
     padding:0px;
@@ -282,8 +187,8 @@ hr{
 #webtoonlist li{
     cursor:pointer;
     margin-top:0;
-    width:100px;
-    height:160px;
+    width:160px;
+    height:240px;
     margin-left:12.5px;
     margin-right:12.5px;
     margin-bottom: 10px;
@@ -291,54 +196,80 @@ hr{
 }
 #webtoonlist li.item_margin{
     margin-top:0;
-    width:100px;
+    width:160px;
     height:100px;
     margin-left:12.5px;
     margin-right:12.5px;
     margin-bottom: 10px;
     border-bottom-left: soild 1px red;
 }
-
-#webtoonlist li span{
-    width:100px;
+#webtoonlist li.item_margin{
+    margin-top:0;
+    width:160px;
+    height:100px;
+    margin-left:12.5px;
+    margin-right:12.5px;
+    margin-bottom: 10px;
+    border-bottom-left: soild 1px red;
 }
 li #item_img{
     position: relative;
-    width:100px;
-    height:100px;
+    width:150px;
+    height:150px;
     top:15px;
 }
 li #merchansub{
-    font-size: 7px;
+    font-size: 10px;
     width: 160px;
 }
 
 li #item_img img{
-    top:20px;
-    width:100px;
-    height:100px;
-    border-radius: 30px;
+    top:25px;
+    width:150px;
+    height:150px;
+    border-radius: 50px;
 }
 #item_text{
     position: relative;
     margin-top : 20px;
 
-    width:100px;
+    width:150px;
     height:90px;
     text-align: left;
 }
 #item_name{
-    width:100px;
-    font-size: 6px;
     font-weight: bold;
-    text-overflow:clip;
+    font-size: 14px;
 }
 #item_price {
     color:red;
     font-weight: bold;
 }
 
-#recommend-keyword-details{
-    position: absolute;
-    top:100px;
+#list-left{
+    text-align: center;
+    position: fixed;
+    width: 50%;
+    left: 0%;
+    background-color: black;
+    color: white;
+    bottom:0px;
+    z-index: 3;
+}
+#list-left:hover{
+    cursor:pointer;
+}
+
+#list-right{
+text-align: center;
+    position: fixed;
+    width: 50%;
+    left: 50%;
+    background-color: black;
+    color: white;
+    bottom:0px;
+    z-index: 3;
+}
+#list-right:hover{
+    cursor:pointer;
 }
